@@ -29,6 +29,7 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @admin_user.save
+        log_in @admin_user
         redirect_to @admin_user, notice: 'User was successfully created.'
       else
         render :new
