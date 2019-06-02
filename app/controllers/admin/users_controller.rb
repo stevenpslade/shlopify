@@ -24,33 +24,27 @@ class Admin::UsersController < ApplicationController
   def create
     @admin_user = Admin::User.new(admin_user_params)
 
-    respond_to do |format|
-      if @admin_user.save
-        log_in @admin_user
-        redirect_to @admin_user, notice: 'User was successfully created.'
-      else
-        render :new
-      end
+    if @admin_user.save
+      log_in @admin_user
+      redirect_to @admin_user, notice: 'User was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /admin/users/1
   def update
-    respond_to do |format|
-      if @admin_user.update(admin_user_params)
-        redirect_to @admin_user, notice: 'User was successfully updated.'
-      else
-        render :edit
-      end
+    if @admin_user.update(admin_user_params)
+      redirect_to @admin_user, notice: 'User was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /admin/users/1
   def destroy
     @admin_user.destroy
-    respond_to do |format|
-      redirect_to admin_users_url, notice: 'User was successfully destroyed.'
-    end
+    redirect_to admin_users_url, notice: 'User was successfully destroyed.'
   end
 
   private

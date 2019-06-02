@@ -15,8 +15,8 @@ class Admin::User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
 
   def remember
-    self.remember_token = User.new_token
-    update_attribute(:remember_digest, User.digest(remember_token))
+    self.remember_token = Admin::User.new_token
+    update_attribute(:remember_digest, Admin::User.digest(remember_token))
   end
 
   def forget
