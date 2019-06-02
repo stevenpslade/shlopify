@@ -2,13 +2,11 @@ class Admin::UsersController < ApplicationController
   before_action :set_admin_user, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/users
-  # GET /admin/users.json
   def index
     @admin_users = Admin::User.all
   end
 
   # GET /admin/users/1
-  # GET /admin/users/1.json
   def show
     @admin_user = Admin::User.find(params[:id])
   end
@@ -23,7 +21,6 @@ class Admin::UsersController < ApplicationController
   end
 
   # POST /admin/users
-  # POST /admin/users.json
   def create
     @admin_user = Admin::User.new(admin_user_params)
 
@@ -38,7 +35,6 @@ class Admin::UsersController < ApplicationController
   end
 
   # PATCH/PUT /admin/users/1
-  # PATCH/PUT /admin/users/1.json
   def update
     respond_to do |format|
       if @admin_user.update(admin_user_params)
@@ -50,7 +46,6 @@ class Admin::UsersController < ApplicationController
   end
 
   # DELETE /admin/users/1
-  # DELETE /admin/users/1.json
   def destroy
     @admin_user.destroy
     respond_to do |format|
