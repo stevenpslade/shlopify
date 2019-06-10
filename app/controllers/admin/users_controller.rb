@@ -1,5 +1,7 @@
 class Admin::UsersController < ApplicationController
+  before_action :require_login, only: [:index, :edit, :update, :destroy]
   before_action :set_admin_user, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/users
   def index
@@ -48,6 +50,17 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+    def require_login
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+
+    def correct_user
+      redirect_to(root_url) unless current_user?(@admin_user)
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_user
       @admin_user = Admin::User.find(params[:id])

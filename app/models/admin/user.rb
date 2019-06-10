@@ -12,7 +12,7 @@ class Admin::User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
 
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   def remember
     self.remember_token = Admin::User.new_token
