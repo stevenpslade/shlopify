@@ -1,4 +1,6 @@
 class Admin::User < ApplicationRecord
+  has_and_belongs_to_many :stores
+
   attr_accessor :remember_token, :activation_token, :reset_token
 
   before_create :create_activation_digest
