@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'products/index'
+  get 'products/show'
   root 'admin/users#new'
 
   get  '/signup', to: 'admin/users#new'
@@ -11,8 +13,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
+    resources :products
   end
 
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
+
+  resources :products, only: [:index, :show]
 end

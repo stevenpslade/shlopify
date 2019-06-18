@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_17_054818) do
+ActiveRecord::Schema.define(version: 2019_06_18_060034) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "first_name"
@@ -33,6 +33,22 @@ ActiveRecord::Schema.define(version: 2019_06_17_054818) do
     t.integer "stores_id"
     t.index ["admin_users_id"], name: "index_admin_users_stores_on_admin_users_id"
     t.index ["stores_id"], name: "index_admin_users_stores_on_stores_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "type"
+    t.decimal "price", precision: 8, scale: 2
+    t.decimal "compare_at_price", precision: 8, scale: 2
+    t.decimal "cost_per_item", precision: 8, scale: 2
+    t.integer "quantity"
+    t.boolean "allow_out_of_stock_purchase", default: false
+    t.boolean "active", default: true
+    t.integer "store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_products_on_store_id"
   end
 
   create_table "stores", force: :cascade do |t|

@@ -1,5 +1,6 @@
 class Store < ApplicationRecord
   has_and_belongs_to_many :admin_users
+  has_many :products
 
   def find_by_subdomain(subdomain)
     store = find_by(subdomain: subdomain)

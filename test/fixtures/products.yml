@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  type: 
+  price: 9.99
+  compare_at_price: 9.99
+  cost_per_item: 9.99
+  quantity: 1
+  allow_out_of_stock_purchase: false
+  store: one
+
+two:
+  title: MyString
+  description: MyText
+  type: 
+  price: 9.99
+  compare_at_price: 9.99
+  cost_per_item: 9.99
+  quantity: 1
+  allow_out_of_stock_purchase: false
+  store: two
