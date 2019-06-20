@@ -1,4 +1,5 @@
 class Admin::ProductsController < ApplicationController
+  before_action :require_login
   before_action :set_admin_product, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/products
@@ -14,7 +15,7 @@ class Admin::ProductsController < ApplicationController
 
   # GET /admin/products/new
   def new
-    @admin_product = Admin::Product.new
+    @admin_product = @current_store.products.new
   end
 
   # GET /admin/products/1/edit
@@ -24,11 +25,11 @@ class Admin::ProductsController < ApplicationController
   # POST /admin/products
   # POST /admin/products.json
   def create
-    @admin_product = Admin::Product.new(admin_product_params)
+    @admin_product = @current_store.products.new(admin_product_params)
 
     respond_to do |format|
       if @admin_product.save
-        format.html { redirect_to @admin_product, notice: 'Product was successfully created.' }
+        format.html { redirect_to admin_product_url(@admin_product), notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @admin_product }
       else
         format.html { render :new }
@@ -64,11 +65,21 @@ class Admin::ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_product
-      @admin_product = Admin::Product.find(params[:id])
+      @admin_product = @current_store.products.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_product_params
-      params.fetch(:admin_product, {})
+      params.require(:product)
+        .permit(
+          :title,
+          :description,
+          :type,
+          :price,
+          :compare_at_price,
+          :cost_per_item,
+          :quantity,
+          :allow_out_of_stock_purchase
+        )
     end
 end

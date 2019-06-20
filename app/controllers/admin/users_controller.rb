@@ -52,14 +52,6 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-    def require_login
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
-    end
-
     def correct_user
       redirect_to(root_url) unless current_user?(@admin_user)
     end
