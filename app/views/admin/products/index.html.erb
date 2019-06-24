@@ -1,10 +1,11 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Admin Products</h1>
 
 <table>
   <thead>
     <tr>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Quantity</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,9 +13,12 @@
   <tbody>
     <% @admin_products.each do |admin_product| %>
       <tr>
-        <td><%= link_to 'Show', admin_product %></td>
+        <td><%= admin_product.title %></td>
+        <td><%= admin_product.price %></td>
+        <td><%= admin_product.quantity %></td>
+        <td><%= link_to 'Show', admin_product_path(admin_product) %></td>
         <td><%= link_to 'Edit', edit_admin_product_path(admin_product) %></td>
-        <td><%= link_to 'Destroy', admin_product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', [:admin, admin_product], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
         unless @current_store
           flash[:danger] = "Store not found."
-          redirect_to root_url(:subdomain => false)
+          redirect_to root_url(subdomain: false)
         end
       end
     end

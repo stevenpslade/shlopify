@@ -9,8 +9,8 @@ class CreateStores < ActiveRecord::Migration[5.2]
     add_index :stores, :subdomain
 
     create_table :admin_users_stores, id: false do |t|
-      t.belongs_to :admin_users, index: true
-      t.belongs_to :stores, index: true
+      t.belongs_to :user, index: true
+      t.belongs_to :store, index: true
     end
   end
 end

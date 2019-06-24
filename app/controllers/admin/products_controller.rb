@@ -11,11 +11,14 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products/1
   # GET /admin/products/1.json
   def show
+    @admin_product  = Product.find(params[:id])
+    @product_images = @admin_product.product_images.all
   end
 
   # GET /admin/products/new
   def new
-    @admin_product = @current_store.products.new
+    @admin_product  = @current_store.products.new
+    @product_image  = @admin_product.product_images.build
   end
 
   # GET /admin/products/1/edit
@@ -29,6 +32,10 @@ class Admin::ProductsController < ApplicationController
 
     respond_to do |format|
       if @admin_product.save
+        params[:product_images]['image'].each do |a|
+          @product_image = @admin_product.product_images.create!(:image => a, :product_id => @admin_product.id)
+        end
+
         format.html { redirect_to admin_product_url(@admin_product), notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @admin_product }
       else
@@ -43,7 +50,11 @@ class Admin::ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @admin_product.update(admin_product_params)
-        format.html { redirect_to @admin_product, notice: 'Product was successfully updated.' }
+        params[:product_images]['image'].each do |a|
+          @product_image = @admin_product.product_images.create!(:image => a, :product_id => @admin_product.id)
+        end
+
+        format.html { redirect_to admin_product_url(@admin_product), notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_product }
       else
         format.html { render :edit }
@@ -79,7 +90,8 @@ class Admin::ProductsController < ApplicationController
           :compare_at_price,
           :cost_per_item,
           :quantity,
-          :allow_out_of_stock_purchase
+          :allow_out_of_stock_purchase,
+          product_images_attributes: [:id, :product_id, :image]
         )
     end
 end

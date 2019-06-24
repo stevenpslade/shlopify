@@ -1,6 +1,10 @@
 class Product < ApplicationRecord
   belongs_to :store
 
+  # image upload
+  has_many :product_images, class_name: 'Admin::ProductImage', dependent: :destroy
+  accepts_nested_attributes_for :product_images
+
   default_scope -> { order(created_at: :desc) }
 
   validates :store_id, presence: true

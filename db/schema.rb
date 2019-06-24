@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_18_060034) do
+ActiveRecord::Schema.define(version: 2019_06_24_015815) do
+
+  create_table "admin_product_images", force: :cascade do |t|
+    t.integer "product_id"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "admin_users", force: :cascade do |t|
     t.string "first_name"
@@ -29,10 +36,17 @@ ActiveRecord::Schema.define(version: 2019_06_18_060034) do
   end
 
   create_table "admin_users_stores", id: false, force: :cascade do |t|
-    t.integer "admin_users_id"
-    t.integer "stores_id"
-    t.index ["admin_users_id"], name: "index_admin_users_stores_on_admin_users_id"
-    t.index ["stores_id"], name: "index_admin_users_stores_on_stores_id"
+    t.integer "user_id"
+    t.integer "store_id"
+    t.index ["store_id"], name: "index_admin_users_stores_on_store_id"
+    t.index ["user_id"], name: "index_admin_users_stores_on_user_id"
+  end
+
+  create_table "product_images", force: :cascade do |t|
+    t.integer "product_id"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade do |t|

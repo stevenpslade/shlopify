@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :product_images
+  end
   get 'products/index'
   get 'products/show'
   root 'admin/users#new'

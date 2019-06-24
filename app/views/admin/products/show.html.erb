@@ -1,2 +1,28 @@
+<p>
+  <strong>Title:</strong>
+  <%= @admin_product.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @admin_product.description %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  $<%= @admin_product.price %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @admin_product.quantity %>
+</p>
+
+<p>
+  <% @product_images.each do |pimg| %>
+    <%= image_tag pimg.image.url %>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_admin_product_path(@admin_product) %> |
 <%= link_to 'Back', admin_products_path %>

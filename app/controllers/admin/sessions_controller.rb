@@ -8,7 +8,8 @@ class Admin::SessionsController < ApplicationController
       if user.activated?
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        redirect_back_or user
+        subdomain = user.stores.first.subdomain
+        redirect_back_or admin_user_url(user, subdomain: subdomain)
       else
         message  = "Account not activated. "
         message += "Check your email for the activation link."
