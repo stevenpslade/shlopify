@@ -18,13 +18,20 @@
 
   <div class="field">
     <%= f.label :password %>
-    <%= f.text_field :password %>
+    <%= f.password_field :password %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation, "Confirmation" %>
-    <%= f.text_field :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
   </div>
+
+  <%= f.fields_for :stores do  |s| %>
+    <div class="field">
+      <%= s.label :subdomain, "Store Subdomain" %>
+      <%= s.text_field :subdomain %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "Sign Up" %>

@@ -7,7 +7,7 @@
   </div>
 
   <div class="field">
-  <%= f.label :description %>
+    <%= f.label :description %>
     <%= f.text_area :description, placeholder: "..." %>
   </div>
 
@@ -36,21 +36,19 @@
     <%= f.number_field :quantity %>
   </div>
 
-  <%= f.label :enable_out_of_stock_purchase do %>
-      <%= f.check_box :enable_out_of_stock_purchase %>
-      <span>Enable Out of Stock Purchase?</span>
+  <%= f.label :allow_out_of_stock_purchase do %>
+    <%= f.check_box :allow_out_of_stock_purchase %>
+    <span>Enable Out of Stock Purchase?</span>
   <% end %>
 
-  <%= f.fields_for :product_images do |p| %>
-    <div class="field">
-      <%= p.label :image %><br>
-      <%= p.file_field :image, 
-        multiple: true, 
-        name: "product_images[image][]", 
-        accept: 'image/jpeg,image/gif,image/png' 
-      %>
-    </div>
-  <% end %>
+  <div class="field">
+    <%= f.label :product_images %><br>
+    <%= f.file_field :product_images, 
+    multiple: true, 
+    name: "product_images[image][]", 
+    accept: 'image/jpeg,image/gif,image/png' 
+    %>
+  </div>
 
 
   <div class="actions">

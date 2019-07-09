@@ -1,6 +1,8 @@
 class Admin::User < ApplicationRecord
   has_and_belongs_to_many :stores
 
+  accepts_nested_attributes_for :stores
+
   attr_accessor :remember_token, :activation_token, :reset_token
 
   before_create :create_activation_digest
@@ -73,6 +75,7 @@ class Admin::User < ApplicationRecord
   end
 
   private
+
     def downcase_email
       email.downcase!
     end

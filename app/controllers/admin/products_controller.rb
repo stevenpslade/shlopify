@@ -23,6 +23,7 @@ class Admin::ProductsController < ApplicationController
 
   # GET /admin/products/1/edit
   def edit
+    @product_image  = @admin_product.product_images.build
   end
 
   # POST /admin/products
@@ -32,8 +33,10 @@ class Admin::ProductsController < ApplicationController
 
     respond_to do |format|
       if @admin_product.save
-        params[:product_images]['image'].each do |a|
-          @product_image = @admin_product.product_images.create!(:image => a, :product_id => @admin_product.id)
+        if params[:product_images]
+          params[:product_images]['image'].each do |a|
+            @product_image = @admin_product.product_images.create!(:image => a, :product_id => @admin_product.id)
+          end
         end
 
         format.html { redirect_to admin_product_url(@admin_product), notice: 'Product was successfully created.' }
@@ -50,8 +53,10 @@ class Admin::ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @admin_product.update(admin_product_params)
-        params[:product_images]['image'].each do |a|
-          @product_image = @admin_product.product_images.create!(:image => a, :product_id => @admin_product.id)
+        if params[:product_images]
+          params[:product_images]['image'].each do |a|
+            product_image = @admin_product.product_images.create!(:image => a, :product_id => @admin_product.id)
+          end
         end
 
         format.html { redirect_to admin_product_url(@admin_product), notice: 'Product was successfully updated.' }

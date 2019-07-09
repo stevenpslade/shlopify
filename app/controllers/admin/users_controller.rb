@@ -17,6 +17,7 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users/new
   def new
     @admin_user = Admin::User.new
+    @admin_user.stores.build
   end
 
   # GET /admin/users/1/edit
@@ -30,7 +31,9 @@ class Admin::UsersController < ApplicationController
     if @admin_user.save
       @admin_user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
-      redirect_to root_url
+      # logging in the user so they can create their store info
+      log_in @admin_user
+      redirect_to admin_products_url(subdomain: @admin_user.stores.first.subdomain)
     else
       render :new
     end
@@ -62,6 +65,14 @@ class Admin::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_user_params
-      params.require(:admin_user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+      params.require(:admin_user)
+        .permit(
+          :first_name, 
+          :last_name, 
+          :email, 
+          :password, 
+          :password_confirmation,
+          stores_attributes: [:subdomain]
+        )
     end
 end
