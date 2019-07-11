@@ -1,5 +1,5 @@
 class Store < ApplicationRecord
-  has_and_belongs_to_many :admin_users
+  has_and_belongs_to_many :admin_users, class_name: "Admin::User"
   has_many :products
 
   validates :subdomain, presence: true, length: { maximum: 255 },

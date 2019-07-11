@@ -1,4 +1,7 @@
-class Admin::SessionsController < ApplicationController
+class Admin::SessionsController < Admin::AdminController
+  skip_before_action :require_login
+  skip_before_action :require_store_ownership
+
   def new
   end
 
@@ -10,7 +13,7 @@ class Admin::SessionsController < ApplicationController
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         subdomain = user.stores.first.subdomain
-        redirect_back_or admin_user_url(user, subdomain: subdomain)
+        redirect_to admin_products_url(subdomain: subdomain)
       # else
       #   message  = "Account not activated. "
       #   message += "Check your email for the activation link."

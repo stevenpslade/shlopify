@@ -11,16 +11,8 @@ class ApplicationController < ActionController::Base
 
         unless @current_store
           flash[:danger] = "Store not found."
-          redirect_to root_url(subdomain: false)
+          redirect_to root_url(subdomain: logged_in? ? @current_user.stores.first.subdomain : false)
         end
-      end
-    end
-
-    def require_login
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
       end
     end
 end

@@ -1,7 +1,10 @@
-class Admin::UsersController < ApplicationController
-  before_action :require_login, only: [:index, :edit, :update, :destroy]
+class Admin::UsersController < Admin::AdminController
+  skip_before_action :require_login,           only: [:new, :create]
+  skip_before_action :require_store_ownership, only: [:new, :create]
+
   before_action :set_admin_user, only: [:show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user,   only: [:show, :edit, :update, :destroy]
+
 
   # GET /admin/users
   def index

@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <div><%= logged_in? ? "Curernt User: " + @current_user.email : "Logged Out" %></div>
     <% flash.each do |message_type, message| %>
       <div><%= message %></div>
     <% end %>

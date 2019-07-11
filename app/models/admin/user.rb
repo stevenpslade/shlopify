@@ -1,5 +1,5 @@
 class Admin::User < ApplicationRecord
-  has_and_belongs_to_many :stores
+  has_and_belongs_to_many :stores, class_name: "Store"
 
   accepts_nested_attributes_for :stores
 

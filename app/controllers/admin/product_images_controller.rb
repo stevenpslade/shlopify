@@ -1,4 +1,4 @@
-class Admin::ProductImagesController < ApplicationController
+class Admin::ProductImagesController < Admin::AdminController
   before_action :set_admin_product_image, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/product_images

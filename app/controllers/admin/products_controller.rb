@@ -1,5 +1,4 @@
-class Admin::ProductsController < ApplicationController
-  before_action :require_login
+class Admin::ProductsController < Admin::AdminController
   before_action :set_admin_product, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/products
