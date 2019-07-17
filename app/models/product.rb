@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :store
+  has_many   :orders, through: :order_products
 
   # image upload
   has_many :product_images, class_name: 'Admin::ProductImage', dependent: :destroy

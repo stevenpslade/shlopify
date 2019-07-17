@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    resources :product_images
-  end
   get 'products/index'
   get 'products/show'
   root 'admin/users#new'
@@ -19,10 +16,13 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
     resources :products
+    resources :product_images
+    resources :orders
   end
 
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
 
   resources :products, only: [:index, :show]
+  resources :orders
 end
