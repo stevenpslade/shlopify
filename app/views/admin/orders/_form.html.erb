@@ -1,17 +1,26 @@
-<%= form_with(model: admin_order, local: true) do |form| %>
-  <% if admin_order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(admin_order.errors.count, "error") %> prohibited this admin_order from being saved:</h2>
+<%= form_with(model: [:admin, @admin_order], local: true) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
 
-      <ul>
-      <% admin_order.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <div class="field">
+    <% product_options = options_for_select(active_products.map { |p| [p.title, p.id] }, @admin_order.product_ids) %>
+    <%= f.select(:order_products, product_options,
+      {prompt: false}, 
+      {multiple: true, name: "order_products[ids][]"}) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :notes %>
+    <%= f.text_area :notes %>
+  </div>
+
+  <div class="field">
+    <%= f.label :payment_status, "Mark as Pending" %>
+    <%= f.radio_button(:payment_status, "pending") %>
+    <%= f.label :payment_status, "Mark as Paid" %>
+    <%= f.radio_button(:payment_status, "paid") %>
+  </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= f.submit "Create Order" %>
   </div>
 <% end %>
