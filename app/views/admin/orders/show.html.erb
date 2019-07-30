@@ -1,4 +1,31 @@
-<p id="notice"><%= notice %></p>
+<p>
+  <strong>ID:</strong>
+  <%= @admin_order.id %>
+</p>
+
+<p>
+  <strong>Created:</strong>
+  <%= @admin_order.created_at %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  $<%= @admin_order.total %>
+</p>
+
+<div>
+  <strong>Prodcuts:</strong>
+  <% @admin_order.order_products.each do |op| %>
+    <p>Title: <%= op.title %></p>
+    <p>Price: $<%= op.price %></p>
+    <p>Quantity: <%= op.quantity %></p>
+  <% end %>
+</div>
+
+<p>
+  <strong>Status:</strong>
+  <%= @admin_order.status %>
+</p>
 
 <%= link_to 'Edit', edit_admin_order_path(@admin_order) %> |
 <%= link_to 'Back', admin_orders_path %>

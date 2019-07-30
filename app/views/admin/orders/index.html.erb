@@ -5,6 +5,11 @@
 <table>
   <thead>
     <tr>
+      <th>Title</th>
+      <th>Created</th>
+      <th>Payment Status</th>
+      <th>Fulfillment Status</th>
+      <th>Total</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,9 +17,14 @@
   <tbody>
     <% @admin_orders.each do |admin_order| %>
       <tr>
-        <td><%= link_to 'Show', admin_order %></td>
+        <td><%= admin_order.id %></td>
+        <td><%= admin_order.created_at %></td>
+        <td><%= admin_order.payment_status %></td>
+        <td><%= admin_order.fulfillment_status %></td>
+        <td><%= admin_order.total %></td>
+        <td><%= link_to 'Show', admin_order_path(admin_order) %></td>
         <td><%= link_to 'Edit', edit_admin_order_path(admin_order) %></td>
-        <td><%= link_to 'Destroy', admin_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', [:admin, admin_order], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

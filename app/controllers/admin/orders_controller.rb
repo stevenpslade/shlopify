@@ -62,8 +62,31 @@ class Admin::OrdersController < Admin::AdminController
   # PATCH/PUT /admin/orders/1
   # PATCH/PUT /admin/orders/1.json
   def update
+    new_order_products_ids = params[:order_products][:ids] - @admin_order.product_ids.map {|id| id.to_s}
+    @order_products = @current_store.products.where(id: new_order_products_ids)
+
+    if new_order_products_ids.empty?
+      @admin_order.errors.add(:order_products, 'At least one product must be selected.')
+    end
+
+    @order_products.each do |product|
+      @admin_order.total += product.price
+    end
+
     respond_to do |format|
-      if @admin_order.update(admin_order_params)
+      if @admin_order.errors.empty? && @admin_order.update(admin_order_params)
+        OrderProduct.transaction do
+          @order_products.each do |product|
+            OrderProduct.new({
+              order_id: @admin_order.id,
+              product_id: product.id,
+              price: product.price,
+              title: product.title,
+              quantity: 1 # TODO: add quantity to order form
+            }).save!
+          end
+        end
+        
         format.html { redirect_to admin_order_url(@admin_order), notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: admin_order_url(@admin_order) }
       else

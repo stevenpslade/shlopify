@@ -6,7 +6,7 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :order_products
 
   enum status: [:draft, :complete, :incomplete]
-  enum payment_status: ['', :pending, :success, :failed]
+  enum payment_status: [:pending, :success, :failed]
   enum fulfillment_status: [:unfulfilled, :fulfilled]
 
   default_scope -> { order(created_at: :desc) }

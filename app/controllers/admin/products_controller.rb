@@ -10,7 +10,6 @@ class Admin::ProductsController < Admin::AdminController
   # GET /admin/products/1
   # GET /admin/products/1.json
   def show
-    @admin_product  = Product.find(params[:id])
     @product_images = @admin_product.product_images.all
   end
 
