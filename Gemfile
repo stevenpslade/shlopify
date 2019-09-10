@@ -39,6 +39,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'carrierwave',             '1.2.2'
 gem 'mini_magick',             '4.7.0'
 
+gem 'webpacker', '~> 4.x'
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '1.3.13'

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  root 'static_pages#home'
+
   get 'products/index'
   get 'products/show'
-  root 'admin/users#new'
 
   get  '/signup', to: 'admin/users#new'
   post '/signup', to: 'admin/users#create'
