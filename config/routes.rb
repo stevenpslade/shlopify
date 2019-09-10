@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
+  get '*path' => redirect('/')
 
   get 'products/index'
   get 'products/show'
@@ -26,4 +27,6 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :show]
   resources :orders
+
+  get '*path' => redirect('/')
 end
