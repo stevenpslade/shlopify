@@ -11,12 +11,12 @@
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <div><%= logged_in? ? "Curernt User: " + @current_user.email : "" %></div>
-    <% flash.each do |message_type, message| %>
-      <div><%= message %></div>
-    <% end %>
-    <%= yield %>
-    <%= debug(params) if Rails.env.development? %>
+  <body class="h-screen overflow-hidden flex items-center justify-center font-sans text-gray-800 bg-gray-100">    
+    <div class="h-screen flex flex-wrap w-full">
+      <%= render "layouts/navbar" %>
+      <div class="flex-4 flex flex-col bg-indigo-700 overflow-hidden h-full">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

@@ -11,8 +11,8 @@
  */
  @tailwind base;
 
- h1 {
-   @apply font-header font-black text-6xl;
+ h1, h2, h3, h4, h5 {
+   @apply font-header;
  }
  
  /**

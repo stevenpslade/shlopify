@@ -2,6 +2,7 @@ class Admin::AdminController < ApplicationController
   before_action :require_login
   before_action :require_store_ownership
 
+  layout "admin"
 
   private
     def require_login

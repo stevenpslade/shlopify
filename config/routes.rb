@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
-  get '*path' => redirect('/')
+  # used to redirect all requests to home for Coming Soon page
+  #get '*path' => redirect('/')
 
   get 'products/index'
   get 'products/show'
@@ -13,13 +14,12 @@ Rails.application.routes.draw do
   get    '/logout',  to: 'admin/sessions#destroy'
   delete '/logout',  to: 'admin/sessions#destroy'
 
-  get '/admin/dashboard', to: 'admin/products#index'
-
   namespace :admin do
     resources :users
     resources :products
     resources :product_images
     resources :orders
+    resources :dashboard, only: [:index]
   end
 
   resources :account_activations, only: [:edit]

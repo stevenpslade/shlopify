@@ -1,9 +1,14 @@
 module.exports = {
   theme: {
     fontFamily: {
-      'header': ['Playfair Display']
+      'logo': 'Playfair Display',
+      'header': 'Rubik'
     },
-    extend: {}
+    extend: {
+      flex: {
+        '4': '4 1 0%'
+      }
+    }
   },
   variants: {},
   plugins: []
