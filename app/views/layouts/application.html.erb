@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <div><%= logged_in? ? "Curernt User: " + @current_user.email : "" %></div>
+    <div><%= logged_in? ? "Current User: " + @current_user.email : "" %></div>
     <% flash.each do |message_type, message| %>
       <div><%= message %></div>
     <% end %>

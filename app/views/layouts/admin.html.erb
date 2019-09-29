@@ -13,8 +13,10 @@
 
   <body class="h-screen overflow-hidden flex items-center justify-center font-sans text-gray-800 bg-gray-100">    
     <div class="h-screen flex flex-wrap w-full">
-      <%= render "layouts/navbar" %>
-      <div class="flex-4 flex flex-col bg-indigo-700 overflow-hidden h-full">
+      <%= render "layouts/horizontal_navbar" %>
+      <%= render "layouts/vertical_navbar" %>
+      <!-- Main Content Container -->
+      <div class="flex-4 flex flex-col overflow-hidden h-full">
         <%= yield %>
       </div>
     </div>
