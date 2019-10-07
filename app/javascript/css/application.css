@@ -10,10 +10,6 @@
  * @import "tailwindcss/preflight";
  */
  @tailwind base;
-
- h1, h2, h3, h4, h5 {
-   @apply font-header;
- }
  
  /**
   * This injects any component classes registered by plugins.
@@ -39,6 +35,18 @@
   * @import "components/buttons";
   * @import "components/forms";
   */
+
+  h1, h2, h3, h4, h5 {
+    @apply font-header;
+  }
+
+  .vertical-nav-item {
+    @apply flex items-center px-2 -mx-2 py-1 font-medium text-gray-600;
+  }
+
+  .vertical-nav-item:hover, .vertical-nav-item.active {
+    @apply text-gray-900;
+  }
   
  /**
   * This injects all of Tailwind's utility classes, generated based on your

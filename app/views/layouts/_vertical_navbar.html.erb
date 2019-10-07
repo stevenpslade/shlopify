@@ -2,16 +2,13 @@
 <div class="flex-1 h-full overflow-y-auto scrolling-touch pb-6 block border-r border-gray-200 bg-white">
   <nav id="nav" class="px-6 pt-6 overflow-y-auto text-sm lg:py-8 lg:pl-6 lg:pr-8 sticky?lg:h-(screen-16)">
     <div class="mb-10">
-      <%= link_to(admin_dashboard_index_path, class: "flex items-center px-2 -mx-2 py-1 hover:text-gray-900 font-normal text-gray-600") do %>
-        <i class="fas fa-home text-lg"></i>
+      <%= link_to(admin_dashboard_index_path, class: "vertical-nav-item #{'active' if current_page?(admin_dashboard_index_path)}") do %>
         <span class="ml-3">Home</span>
       <% end %>
-      <%= link_to(admin_products_path, class: "flex items-center px-2 -mx-2 py-1 hover:text-gray-900 font-normal text-gray-600") do %>
-        <i class="fas fa-tag text-lg"></i>
+      <%= link_to(admin_products_path, class: "vertical-nav-item #{'active' if current_page?(admin_products_path)}") do %>
         <span class="ml-3">Products</span>
       <% end %>
-      <%= link_to(admin_orders_path, class: "flex items-center px-2 -mx-2 py-1 hover:text-gray-900 font-normal text-gray-600") do %>
-        <i class="fas fa-receipt text-lg"></i>
+      <%= link_to(admin_orders_path, class: "vertical-nav-item #{'active' if current_page?(admin_orders_path)}") do %>
         <span class="ml-3">Orders</span>
       <% end %>
     </div>
