@@ -47,6 +47,22 @@
   .vertical-nav-item:hover, .vertical-nav-item.active {
     @apply text-gray-900;
   }
+
+  .vertical-nav-subitem {
+    @apply px-2 -mx-2 py-1 relative block text-gray-600 font-medium;
+  }
+
+  .vertical-nav-subitem:hover {
+    @apply text-gray-900;
+  }
+
+  .vertical-nav-subitem.active {
+    @apply text-purple-600;
+  }
+
+  .vertical-nav-subitem.active span:first-child {
+    @apply opacity-25;
+  }
   
  /**
   * This injects all of Tailwind's utility classes, generated based on your

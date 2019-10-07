@@ -1,0 +1,26 @@
+<!-- Vertical Nav -->
+<div class="flex-1 h-full overflow-y-auto scrolling-touch pb-6 block border-r border-gray-200 bg-white">
+  <nav id="nav" class="px-6 pt-6 overflow-y-auto text-sm lg:py-8 lg:pl-6 lg:pr-8 sticky?lg:h-(screen-16)">
+    <div class="mb-10">
+      <%= link_to(admin_dashboard_index_path, class: "vertical-nav-item #{'active' if current_page?(admin_dashboard_index_path)}") do %>
+        <span class="ml-3">Home</span>
+      <% end %>
+      <%= link_to(admin_products_path, class: "vertical-nav-item #{'active' if controller.controller_name == 'products' }") do %>
+        <span class="ml-3">Products</span>
+      <% end %>
+      <%= link_to(admin_orders_path, class: "vertical-nav-item #{'active' if controller.controller_name == 'orders' }") do %>
+        <span class="ml-3">Orders</span>
+      <% end %>
+    </div>
+
+    <% if !current_page?(admin_dashboard_index_path) %>
+      <% subitems = get_subitems_by_controller(controller.controller_name) %>
+      <div class="mb-8">
+        <h5 class="mb-3 lg:mb-2 text-gray-500 uppercase tracking-wide font-bold text-sm lg:text-xs">On This Page</h5>
+        <ul>
+          <%= render partial: "components/navigation/subitems", locals: {subitems: subitems} %>
+        </ul>
+      </div>
+    <% end %>
+  </nav>
+</div>

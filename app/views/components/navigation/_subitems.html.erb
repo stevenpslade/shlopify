@@ -1,0 +1,8 @@
+<% subitems.each do |item| %>
+  <li class="mb-3 lg:mb-1">
+    <%= link_to(item[:link], class: "vertical-nav-subitem #{'active' if current_page?(item[:link])}") do %>
+      <span class="rounded absolute inset-0 bg-purple-200 opacity-0"></span>
+      <span class="relative"><%= item[:title] %></span>
+    <% end %>
+  </li>
+<% end %>
