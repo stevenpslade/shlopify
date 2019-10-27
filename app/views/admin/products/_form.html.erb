@@ -34,9 +34,9 @@
         <div class="md:w-5/6">
           <label class="flex flex-col items-center cursor-pointer bg-white hover:bg-gray-100 text-gray-600 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
             <span class="text-sm">Add Images</span>
-            <%= f.file_field :product_images, 
+            <%= f.file_field :images, 
               multiple: true, 
-              name: "product_images[image][]", 
+              name: "product[images][]", 
               accept: 'image/jpeg,image/gif,image/png',
               class: "hidden" 
             %>

@@ -3,9 +3,7 @@ class Product < ApplicationRecord
   has_many   :order_products
   has_many   :orders, through: :order_products
 
-  # image upload
-  has_many :product_images, class_name: 'Admin::ProductImage', dependent: :destroy
-  accepts_nested_attributes_for :product_images
+  has_many_attached :images
 
   default_scope -> { order(created_at: :desc) }
 

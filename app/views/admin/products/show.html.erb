@@ -19,8 +19,8 @@
 </p>
 
 <p>
-  <% @product_images.each do |pimg| %>
-    <%= image_tag pimg.image.url %>
+  <% @admin_product.images.each do |img| %>
+    <%= image_tag img %>
   <% end %>
 </p>
 

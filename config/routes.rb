@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
     resources :products
-    resources :product_images
     resources :orders
     resources :dashboard, only: [:index]
   end
@@ -28,5 +27,9 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show]
   resources :orders
 
-  get '*path' => redirect('/')
+  #get '*path' => redirect('/')
+  # catch all but excluding active storage resources
+  get '*path', to: 'static_pages#home', constraints: lambda { |req|
+    req.path.exclude? 'rails/active_storage'
+  }
 end
