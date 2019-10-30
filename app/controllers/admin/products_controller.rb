@@ -75,7 +75,6 @@ class Admin::ProductsController < Admin::AdminController
         .permit(
           :title,
           :description,
-          :type,
           :price,
           :compare_at_price,
           :cost_per_item,

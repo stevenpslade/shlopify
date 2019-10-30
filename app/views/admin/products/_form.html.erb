@@ -29,14 +29,13 @@
     </div>
 
     <div class="bg-white shadow rounded-lg flex flex-col p-8 mb-5">
+      <div id="imagePreviewContainer" class="hidden flex flex-wrap bg-gray-200 border-2 border-gray-200 rounded w-full py-2 px-4 mb-5" style="min-height: 12rem;"></div>
       <div class="md:flex md:items-center mb-6">
-        <div class="md:w-1/6"></div>
-        <div class="md:w-5/6">
+        <div class="w-full">
           <label class="flex flex-col items-center cursor-pointer bg-white hover:bg-gray-100 text-gray-600 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
             <span class="text-sm">Add Images</span>
             <%= f.file_field :images, 
-              multiple: true, 
-              name: "product[images][]", 
+              multiple: true,
               accept: 'image/jpeg,image/gif,image/png',
               class: "hidden" 
             %>
@@ -104,3 +103,33 @@
     </div>
   </div> 
 <% end %>
+
+<script>
+function setupReader(file) {
+  var name = file.name;
+  var reader = new FileReader();  
+  reader.onload = function(e) {
+    let img   = document.createElement('img');
+    img.src   = e.target.result;
+    img.width = '160';
+
+    let div       = document.createElement('div');
+    div.className = 'p-2';
+    div.appendChild(img);
+
+    let imagePreviewContainer = document.getElementById('imagePreviewContainer');
+    imagePreviewContainer.appendChild(div);
+  }
+
+  reader.readAsDataURL(file);
+}
+
+document.getElementById('product_images').onchange = function () {
+  let imagePreviewContainer = document.getElementById('imagePreviewContainer');
+  imagePreviewContainer.innerHTML = '';
+  imagePreviewContainer.classList.remove('hidden');
+  for (var i = 0; i < this.files.length; i++) {
+    setupReader(this.files[i]);
+  }
+};
+</script>
