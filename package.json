@@ -2,8 +2,11 @@
   "name": "shlopify",
   "private": true,
   "dependencies": {
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "^4.0.7",
-    "tailwindcss": "^1.0.6"
+    "tailwindcss": "^1.0.6",
+    "turbolinks": "^5.2.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.7.2"
