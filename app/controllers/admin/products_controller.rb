@@ -9,8 +9,8 @@ class Admin::ProductsController < Admin::AdminController
 
   # GET /admin/products/1
   # GET /admin/products/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /admin/products/new
   def new
@@ -28,7 +28,7 @@ class Admin::ProductsController < Admin::AdminController
 
     respond_to do |format|
       if @admin_product.save
-        format.html { redirect_to admin_product_url(@admin_product), notice: 'Product was successfully created.' }
+        format.html { redirect_to edit_admin_product_url(@admin_product), notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @admin_product }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::ProductsController < Admin::AdminController
   def update
     respond_to do |format|
       if @admin_product.update(admin_product_params)
-        format.html { redirect_to admin_product_url(@admin_product), notice: 'Product was successfully updated.' }
+        format.html { redirect_to edit_admin_product_url(@admin_product), notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_product }
       else
         format.html { render :edit }

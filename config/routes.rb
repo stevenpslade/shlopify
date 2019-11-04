@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
-    resources :products do
+    resources :products, except: :show do
       member do
         delete :delete_image_attachment
       end
