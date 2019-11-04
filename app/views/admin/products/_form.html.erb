@@ -1,5 +1,5 @@
 <%= form_with(
-    model: [:admin, @admin_product], 
+    model: [:admin, admin_product], 
     local: true, 
     html: { multipart: true }, 
     class: "w-full flex flex-wrap flex-auto"
@@ -27,6 +27,26 @@
         </div>
       </div>
     </div>
+
+    <% if admin_product.images.attached? %>
+      <div id="gallery" class="bg-white shadow rounded-lg flex flex-wrap p-8 mb-5">
+        <% @admin_product.images.each do |img| %>
+          <div class="image relative m-1 border border-gray-300 rounded-lg overflow-hidden">
+            <%= link_to(
+              delete_image_attachment_admin_product_path(img.signed_id),
+              remote: true, 
+              class:"removeImage invisible absolute w-full h-full flex items-center justify-center", 
+              method: :delete,
+              data: { confirm: 'Are you sure?' }
+            ) do %>
+              <span class="z-10 font-semibold text-red-500">Remove</span>
+              <div class="absolute opacity-75 bg-white w-full h-full"></div>
+            <% end %>
+            <%= image_tag(img, size: "160", class: "h-full") %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
 
     <div class="bg-white shadow rounded-lg flex flex-col p-8 mb-5">
       <div id="imagePreviewContainer" class="hidden flex flex-wrap bg-gray-200 border-2 border-gray-200 rounded w-full py-2 px-4 mb-5" style="min-height: 12rem;"></div>
@@ -99,7 +119,7 @@
   <div class="md:flex md:items-center px-3 xl:px-3 w-full max-w-3xl mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-4/6">
     <div class="md:w-1/6"></div>
     <div class="md:w-5/6 text-right">
-      <%= f.button "Add Product", class: "shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-medium py-2 px-4 rounded" %>
+      <%= f.button "Save Product", class: "shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-medium py-2 px-4 rounded" %>
     </div>
   </div> 
 <% end %>
@@ -132,4 +152,9 @@ document.getElementById('product_images').onchange = function () {
     setupReader(this.files[i]);
   }
 };
+
+
+document.body.addEventListener('ajax:success', function(event) {
+  event.target.parentNode.remove();
+});
 </script>

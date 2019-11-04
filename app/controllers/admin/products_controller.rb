@@ -19,7 +19,6 @@ class Admin::ProductsController < Admin::AdminController
 
   # GET /admin/products/1/edit
   def edit
-    @product_image  = @admin_product.product_images.build
   end
 
   # POST /admin/products
@@ -41,7 +40,6 @@ class Admin::ProductsController < Admin::AdminController
   # PATCH/PUT /admin/products/1
   # PATCH/PUT /admin/products/1.json
   def update
-    @admin_product.images.attach(params[:images])
     respond_to do |format|
       if @admin_product.update(admin_product_params)
         format.html { redirect_to admin_product_url(@admin_product), notice: 'Product was successfully updated.' }
@@ -61,6 +59,12 @@ class Admin::ProductsController < Admin::AdminController
       format.html { redirect_to admin_products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def delete_image_attachment
+    @image = ActiveStorage::Blob.find_signed(params[:id])
+    @image.attachments.first.purge
+    render json: {}, status: :ok
   end
 
   private

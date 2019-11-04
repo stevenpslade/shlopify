@@ -63,6 +63,10 @@
   .vertical-nav-subitem.active span:first-child {
     @apply opacity-25;
   }
+
+  #gallery .image:hover .removeImage {
+    visibility: visible;
+  }
   
  /**
   * This injects all of Tailwind's utility classes, generated based on your
