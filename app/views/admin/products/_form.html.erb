@@ -30,7 +30,7 @@
 
     <% if admin_product.images.attached? %>
       <div id="gallery" class="bg-white shadow rounded-lg flex flex-wrap p-8 mb-5">
-        <% @admin_product.images.each do |img| %>
+        <% admin_product.images.each do |img| %>
           <div class="image relative m-1 border border-gray-300 rounded-lg overflow-hidden">
             <%= link_to(
               delete_image_attachment_admin_product_path(img.signed_id),
@@ -73,7 +73,10 @@
           <%= f.label :price, class: "block text-purple-500 font-normal mb-1 md:mb-0 pr-4" %>
         </div>
         <div>
-          <%= f.number_field :price, step: :any, class: "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
+          <%= f.number_field :price, 
+            step: :any, 
+            value: (number_with_precision(admin_product.price, precision: 2) || ''),
+            class: "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
         </div>
       </div>
 
@@ -82,7 +85,10 @@
           <%= f.label :compare_at_price, class: "block text-purple-500 font-normal mb-1 md:mb-0 pr-4" %>
         </div>
         <div>
-          <%= f.number_field :compare_at_price, step: :any, class: "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
+          <%= f.number_field :compare_at_price, 
+          step: :any, 
+          value: (number_with_precision(admin_product.compare_at_price, precision: 2) || ''),
+          class: "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
         </div>
       </div>
 
@@ -91,7 +97,10 @@
           <%= f.label :cost_per_item, class: "block text-purple-500 font-normal mb-1 md:mb-0 pr-4" %>
         </div>
         <div>
-          <%= f.number_field :cost_per_item, step: :any, class: "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
+          <%= f.number_field :cost_per_item, 
+          step: :any, 
+          value: (number_with_precision(admin_product.cost_per_item, precision: 2) || ''),
+          class: "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
         </div>
       </div>
     </div>

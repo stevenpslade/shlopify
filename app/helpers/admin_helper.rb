@@ -7,7 +7,7 @@ module AdminHelper
       subitems << {:title => 'Add Product', :link => new_admin_product_path}
     when 'orders'
       subitems << {:title => 'All Orders', :link => admin_orders_path}
-      subitems << {:title => 'Add Order', :link => new_admin_order_path}
+      #subitems << {:title => 'Add Order', :link => new_admin_order_path}
     end
 
     return subitems

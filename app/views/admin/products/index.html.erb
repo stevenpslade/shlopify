@@ -1,29 +1,54 @@
-<h1>Admin Products</h1>
+<div class="flex px-6 pb-2 xl:px-6 w-full lg:ml-0 lg:mr-auto xl:mx-0">
+  <h1 class="text-3xl">Products</h1>
+  <%= link_to 'Add Product', new_admin_product_path, class: "w-32 ml-auto text-center self-center shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-medium py-2 px-4 rounded" %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @admin_products.each do |admin_product| %>
-      <tr>
-        <td><%= admin_product.title %></td>
-        <td><%= admin_product.price %></td>
-        <td><%= admin_product.quantity %></td>
-        <td><%= link_to 'Show', admin_product_path(admin_product) %></td>
-        <td><%= link_to 'Edit', edit_admin_product_path(admin_product) %></td>
-        <td><%= link_to 'Destroy', [:admin, admin_product], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Admin Product', new_admin_product_path %>
+<div class="px-3 xl:px-3 w-full mx-auto lg:ml-0 lg:mr-auto xl:mx-0">
+  <div class="bg-white shadow rounded-lg flex flex-col p-8 mb-5">
+    <table class="w-full text-left table-collapse">
+      <thead>
+        <tr>
+          <th class="p-2 border-b border-gray-300 font-medium text-purple-600"></th>
+          <th class="p-2 border-b border-gray-300 font-medium text-purple-600">Product</th>
+          <th class="p-2 border-b border-gray-300 font-medium text-purple-600">Inventory</th>
+          <th class="p-2 border-b border-gray-300 font-medium text-purple-600">Price</th>
+          <th class="p-2 border-b border-gray-300 font-medium text-purple-600"></th>
+        </tr>
+      </thead>
+      <tbody class="align-middle">
+        <% @admin_products.each do |admin_product| %>
+          <tr class="h-12">
+            <td class="p-2 border-t border-gray-300">
+              <%= admin_product.images.attached? ? 
+                image_tag(admin_product.images.first, class: "block h-12 w-12 object-contain border border-gray-300") : '' %>
+            </td>
+            <td class="p-2 border-t border-gray-300">
+              <span class="text-gray-600 hover:text-gray-900">
+                <%= link_to admin_product.title, edit_admin_product_path(admin_product) %>
+              </span>
+            </td>
+            <td class="p-2 border-t border-gray-300">
+              <span class="inline-block w-10 text-center py-2 leading-none text-xs font-semibold text-gray-700 bg-gray-200 rounded-full">
+                <%= admin_product.quantity %> 
+              </span>
+              <span class="text-sm text-gray-600">in stock</span>
+            </td>
+            <td class="p-2 border-t border-gray-300">
+              <span class="inline-block w-20 text-center py-2 leading-none text-sm font-semibold text-green-700 bg-green-200 rounded-full">
+                $<%= number_with_precision(admin_product.price, precision: 2) %>
+              </span>
+            </td>
+            <td class="p-2 border-t border-gray-300 w-1">
+              <%= link_to 'Delete', 
+                [:admin, admin_product], 
+                class: 'text-sm text-red-500 hover:text-red-700',
+                method: :delete, 
+                data: { confirm: "Are you sure you want to delete '#{admin_product.title}'?" } 
+              %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

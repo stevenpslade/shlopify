@@ -1,35 +1,43 @@
-<p id="notice"><%= notice %></p>
+<div class="flex px-6 pb-2 xl:px-6 w-full lg:ml-0 lg:mr-auto xl:mx-0">
+  <h1 class="text-3xl">Orders</h1>
+  <%# link_to 'Add Order', new_admin_order_path, class: "w-32 ml-auto self-center text-center shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-medium py-2 px-4 rounded" %>
+</div>
 
-<h1>Admin Orders</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Created</th>
-      <th>Payment Status</th>
-      <th>Fulfillment Status</th>
-      <th>Total</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @admin_orders.each do |admin_order| %>
-      <tr>
-        <td><%= admin_order.id %></td>
-        <td><%= admin_order.created_at %></td>
-        <td><%= admin_order.payment_status %></td>
-        <td><%= admin_order.fulfillment_status %></td>
-        <td><%= admin_order.total %></td>
-        <td><%= link_to 'Show', admin_order_path(admin_order) %></td>
-        <td><%= link_to 'Edit', edit_admin_order_path(admin_order) %></td>
-        <td><%= link_to 'Destroy', [:admin, admin_order], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Admin Order', new_admin_order_path %>
+<div class="px-3 xl:px-3 w-full mx-auto lg:ml-0 lg:mr-auto xl:mx-0">
+  <div class="bg-white shadow rounded-lg flex flex-col p-8 mb-5">
+    <table class="w-full text-left table-collapse">
+      <thead>
+        <tr>
+          <th class="p-2 border-b border-gray-300 font-medium text-purple-600">Order</th>
+          <th class="p-2 border-b border-gray-300 font-medium text-purple-600">Date</th>
+          <th class="p-2 border-b border-gray-300 font-medium text-purple-600">Payment Status</th>
+          <th class="p-2 border-b border-gray-300 font-medium text-purple-600">Fulfillment Status</th>
+          <th class="p-2 border-b border-gray-300 font-medium text-purple-600">Total</th>
+        </tr>
+      </thead>
+      <tbody class="align-middle">
+        <% @admin_orders.each do |admin_order| %>
+          <tr class="h-12">
+            <td class="p-2 border-t border-gray-300">
+              <span class="text-gray-600 hover:text-gray-900">
+                #<%= link_to admin_order.id, admin_order_path(admin_order) %>
+              </span>
+            </td>
+            <td class="p-2 border-t border-gray-300"><%= admin_order.created_at.strftime("%B %d, %Y %k:%M") %> UTC</td>
+            <td class="p-2 border-t border-gray-300">
+              <%= admin_order.payment_status.capitalize %>
+            </td>
+            <td class="p-2 border-t border-gray-300">
+              <%= admin_order.fulfillment_status.capitalize %>
+            </td>
+            <td class="p-2 border-t border-gray-300">
+              <span class="inline-block w-20 text-center py-2 leading-none text-sm font-semibold text-green-700 bg-green-200 rounded-full">
+                $<%= number_with_precision(admin_order.total, precision: 2) %>
+              </span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
