@@ -1,0 +1,13 @@
+<div class="flex px-6 pb-2 xl:px-6 w-full lg:ml-0 lg:mr-auto xl:mx-0">
+  <% if yield.presence %>
+    <%= yield %>
+  <% else %>
+    <h1 class="text-3xl"><%= header_body %></h1>
+    <% if local_assigns[:link_body] && local_assigns[:link_url] %>
+      <%= link_to link_body, 
+        link_url, 
+        class: "w-32 ml-auto text-center self-center shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-medium py-2 px-4 rounded" 
+      %>
+    <% end %>
+  <% end %>
+</div>

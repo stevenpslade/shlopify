@@ -1,5 +1,5 @@
-<h1 class="text-3xl px-6 xl:px-6 w-full mx-auto lg:ml-0 lg:mr-auto xl:mx-0">
-  <%= @admin_product.title %>
-</h1>
+<%= render 'components/header', 
+  header_body: @admin_product.title
+%>
 
 <%= render 'form', admin_product: @admin_product %>

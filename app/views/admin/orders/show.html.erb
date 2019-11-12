@@ -1,12 +1,22 @@
-<p>
-  <strong>ID:</strong>
-  <%= @admin_order.id %>
-</p>
+<%= render 'components/header' do %> 
+  <h1 class="text-3xl">#<%= @admin_order.id %></h1>
+  <span class="p-2 self-end text-gray-600 tracking-wide font-semibold text-sm">
+    <%= @admin_order.created_at.strftime("%B %d, %Y %k:%M") %> UTC
+  </span>
+<% end %>
 
-<p>
-  <strong>Created:</strong>
-  <%= @admin_order.created_at %>
-</p>
+<div class="flex px-6 pb-2" style="margin-top: -0.5rem;">
+  <%= render 'components/pill', 
+    text: "Payment #{@admin_order.payment_status.capitalize}",
+    status: @admin_order.payment_status,
+    border: true
+  %>
+  <%= render 'components/pill', 
+    text: @admin_order.fulfillment_status.capitalize,
+    status: @admin_order.fulfillment_status,
+    border: true
+  %>
+</div>
 
 <p>
   <strong>Total:</strong>
@@ -26,6 +36,3 @@
   <strong>Status:</strong>
   <%= @admin_order.status %>
 </p>
-
-<%= link_to 'Edit', edit_admin_order_path(@admin_order) %> |
-<%= link_to 'Back', admin_orders_path %>

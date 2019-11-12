@@ -1,7 +1,8 @@
-<div class="flex px-6 pb-2 xl:px-6 w-full lg:ml-0 lg:mr-auto xl:mx-0">
-  <h1 class="text-3xl">Products</h1>
-  <%= link_to 'Add Product', new_admin_product_path, class: "w-32 ml-auto text-center self-center shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-medium py-2 px-4 rounded" %>
-</div>
+<%= render 'components/header', 
+  header_body: 'Products',
+  link_body: 'Add Product',
+  link_url: new_admin_product_path
+%>
 
 <div class="px-3 xl:px-3 w-full mx-auto lg:ml-0 lg:mr-auto xl:mx-0">
   <div class="bg-white shadow rounded-lg flex flex-col p-8 mb-5">

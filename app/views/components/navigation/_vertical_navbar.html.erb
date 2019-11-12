@@ -16,7 +16,7 @@
     <% if !current_page?(admin_dashboard_index_path) %>
       <% subitems = get_subitems_by_controller(controller.controller_name) %>
       <div class="mb-8">
-        <h5 class="mb-3 lg:mb-2 text-gray-500 uppercase tracking-wide font-bold text-sm lg:text-xs">On This Page</h5>
+        <h5 class="mb-3 lg:mb-2 text-gray-500 uppercase tracking-wide font-bold text-sm lg:text-xs">In This Section</h5>
         <ul>
           <%= render partial: "components/navigation/subitems", locals: {subitems: subitems} %>
         </ul>
