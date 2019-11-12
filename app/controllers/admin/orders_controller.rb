@@ -9,8 +9,13 @@ class Admin::OrdersController < Admin::AdminController
 
   # GET /admin/orders/1
   # GET /admin/orders/1.json
-  # def show
-  # end
+  def show
+    product_ids           = @admin_order.order_products.map(&:product_id)
+    @images_by_product_id = ActiveStorage::Attachment
+      .where(record_type: 'Product', record_id: product_ids)
+      .group(:record_id)
+      .map { |image| [image.record_id, image] }.to_h
+  end
 
   # GET /admin/orders/new
   def new
