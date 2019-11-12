@@ -27,6 +27,6 @@ module AdminHelper
     end
 
     style = "text-#{color}-700 bg-#{color}-200"
-    border ? style << " border-2 border-#{color}-300" : style
+    border ? style << " border border-#{color}-300" : style
   end
 end
