@@ -6,6 +6,7 @@
 
 <div class="px-3 xl:px-3 w-full mx-auto lg:ml-0 lg:mr-auto xl:mx-0">
   <div class="bg-white shadow rounded-lg flex flex-col p-8 mb-5">
+    <%= render 'components/pagy', pagy: @pagy %>
     <table class="w-full text-left table-collapse">
       <thead>
         <tr>
@@ -35,9 +36,10 @@
               <span class="text-sm text-gray-600">in stock</span>
             </td>
             <td class="p-2 border-t border-gray-300">
-              <span class="inline-block w-20 text-center py-2 leading-none text-sm font-semibold text-green-700 bg-green-200 rounded-full">
-                $<%= number_with_precision(admin_product.price, precision: 2) %>
-              </span>
+              <%= render 'components/pill', 
+                text: "$#{number_with_precision(admin_product.price, precision: 2)}",
+                status: 'success'
+              %>
             </td>
             <td class="p-2 border-t border-gray-300 w-1">
               <%= link_to 'Delete', 

@@ -42,6 +42,8 @@ gem 'webpacker', '~> 4.x'
 
 gem 'aws-sdk-s3', require: false
 
+gem 'pagy', '~> 3.7'
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '1.3.13'

@@ -4,7 +4,7 @@ class Admin::ProductsController < Admin::AdminController
   # GET /admin/products
   # GET /admin/products.json
   def index
-    @admin_products = @current_store.products
+    @pagy, @admin_products = pagy(@current_store.products)
   end
 
   # GET /admin/products/1

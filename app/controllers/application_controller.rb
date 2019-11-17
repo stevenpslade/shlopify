@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include Admin::SessionsHelper
 
+  # Pagy gem for pagination
+  include Pagy::Backend
+
   private
     def set_current_store
       if (request.subdomains.first)
