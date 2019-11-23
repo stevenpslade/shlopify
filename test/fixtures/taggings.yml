@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  taggings_count: 1
+  product: one
+  store: one
+
+two:
+  taggings_count: 1
+  product: two
+  store: two
