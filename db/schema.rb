@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_30_034959) do
+ActiveRecord::Schema.define(version: 2019_11_23_232425) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -118,6 +118,24 @@ ActiveRecord::Schema.define(version: 2019_10_30_034959) do
     t.datetime "updated_at", null: false
     t.boolean "active", default: true
     t.index ["subdomain"], name: "index_stores_on_subdomain"
+  end
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer "taggings_count"
+    t.integer "tag_id"
+    t.integer "product_id"
+    t.integer "store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_taggings_on_product_id"
+    t.index ["store_id"], name: "index_taggings_on_store_id"
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
