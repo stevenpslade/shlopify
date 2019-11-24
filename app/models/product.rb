@@ -3,8 +3,12 @@ class Product < ApplicationRecord
   after_save :save_tags
 
   belongs_to :store
+  
   has_many   :order_products
   has_many   :orders, through: :order_products
+
+  has_many   :collection_products
+  has_many   :collections, through: :collection_products
 
   has_many_attached :images
 

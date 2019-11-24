@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_24_013953) do
+ActiveRecord::Schema.define(version: 2019_11_24_233103) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -61,6 +61,33 @@ ActiveRecord::Schema.define(version: 2019_11_24_013953) do
     t.integer "store_id"
     t.index ["store_id"], name: "index_admin_users_stores_on_store_id"
     t.index ["user_id"], name: "index_admin_users_stores_on_user_id"
+  end
+
+  create_table "collection_products", force: :cascade do |t|
+    t.integer "collection_id"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collection_id"], name: "index_collection_products_on_collection_id"
+    t.index ["product_id"], name: "index_collection_products_on_product_id"
+  end
+
+  create_table "collection_tags", force: :cascade do |t|
+    t.integer "collection_id"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collection_id"], name: "index_collection_tags_on_collection_id"
+    t.index ["tag_id"], name: "index_collection_tags_on_tag_id"
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "store_id"
+    t.index ["store_id"], name: "index_collections_on_store_id"
   end
 
   create_table "order_products", force: :cascade do |t|
