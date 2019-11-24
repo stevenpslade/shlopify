@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_23_232425) do
+ActiveRecord::Schema.define(version: 2019_11_24_013953) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -121,7 +121,6 @@ ActiveRecord::Schema.define(version: 2019_11_23_232425) do
   end
 
   create_table "taggings", force: :cascade do |t|
-    t.integer "taggings_count"
     t.integer "tag_id"
     t.integer "product_id"
     t.integer "store_id"
