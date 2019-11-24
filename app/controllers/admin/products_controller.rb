@@ -84,6 +84,7 @@ class Admin::ProductsController < Admin::AdminController
           :cost_per_item,
           :quantity,
           :allow_out_of_stock_purchase,
+          :tag_names,
           images: []
         )
     end

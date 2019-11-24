@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+  include Taggable
+  after_save :save_tags
+
   belongs_to :store
   has_many   :order_products
   has_many   :orders, through: :order_products
