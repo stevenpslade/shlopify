@@ -35,7 +35,7 @@ module Taggable
         }).save!
       end
     end
-    
+
     clean_tags
   end
 
