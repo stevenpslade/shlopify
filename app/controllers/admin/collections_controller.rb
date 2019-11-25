@@ -1,12 +1,21 @@
 class Admin::CollectionsController < Admin::AdminController
   include ImageAttachmentConcern
-  
+
   before_action :set_admin_collection, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/collections
   # GET /admin/collections.json
   def index
-    @admin_collections = Collection.all
+    @pagy, @admin_collections = pagy(@current_store.collections)
+
+    collection_ids  = @admin_collections.map(&:id)
+    collection_tags = CollectionTag.where(collection_id: collection_ids)
+    tag_ids         = collection_tags.map(&:tag_id)
+    
+    @tags_by_collection_id = Hash.new {|h,k| h[k] = [] }
+    tags_by_id             = Tag.where(id: tag_ids).map { |tag| [tag.id, tag] }.to_h
+    
+    collection_tags.each { |ct| @tags_by_collection_id[ct.collection_id] << tags_by_id[ct.tag_id] }
   end
 
   # GET /admin/collections/1
