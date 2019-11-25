@@ -4,7 +4,7 @@ class Admin::CollectionsController < Admin::AdminController
   # GET /admin/collections
   # GET /admin/collections.json
   def index
-    @admin_collections = Admin::Collection.all
+    @admin_collections = Collection.all
   end
 
   # GET /admin/collections/1
@@ -14,7 +14,7 @@ class Admin::CollectionsController < Admin::AdminController
 
   # GET /admin/collections/new
   def new
-    @admin_collection = Admin::Collection.new
+    @admin_collection = Collection.new
   end
 
   # GET /admin/collections/1/edit
@@ -24,7 +24,7 @@ class Admin::CollectionsController < Admin::AdminController
   # POST /admin/collections
   # POST /admin/collections.json
   def create
-    @admin_collection = Admin::Collection.new(admin_collection_params)
+    @admin_collection = Collection.new(admin_collection_params)
 
     respond_to do |format|
       if @admin_collection.save
@@ -64,11 +64,16 @@ class Admin::CollectionsController < Admin::AdminController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_collection
-      @admin_collection = Admin::Collection.find(params[:id])
+      @admin_collection = Collection.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_collection_params
-      params.fetch(:admin_collection, {})
+      params.require(:collecion)
+        .permit(
+          :title,
+          :description,
+          :image
+        )
     end
 end

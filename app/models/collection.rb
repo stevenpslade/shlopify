@@ -6,4 +6,8 @@ class Collection < ApplicationRecord
 
   has_many   :collection_tags
   has_many   :tags, through: :collection_tags
+
+  has_one_attached :image
+
+  enum type: [:automatic, :manual]
 end

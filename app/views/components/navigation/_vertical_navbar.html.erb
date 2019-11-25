@@ -8,6 +8,9 @@
       <%= link_to(admin_products_path, class: "vertical-nav-item #{'active' if controller.controller_name == 'products' }") do %>
         <span class="ml-3">Products</span>
       <% end %>
+      <%= link_to(admin_collections_path, class: "vertical-nav-item #{'active' if controller.controller_name == 'collections' }") do %>
+        <span class="ml-3">Collections</span>
+      <% end %>
       <%= link_to(admin_orders_path, class: "vertical-nav-item #{'active' if controller.controller_name == 'orders' }") do %>
         <span class="ml-3">Orders</span>
       <% end %>
