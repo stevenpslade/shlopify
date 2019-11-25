@@ -1,4 +1,6 @@
 class Admin::CollectionsController < Admin::AdminController
+  include ImageAttachmentConcern
+  
   before_action :set_admin_collection, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/collections

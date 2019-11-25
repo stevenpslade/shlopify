@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2019_11_25_002358) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "store_id"
-    t.integer "type", default: 0
+    t.integer "condition_type", default: 0
     t.index ["store_id"], name: "index_collections_on_store_id"
   end
 

@@ -1,4 +1,6 @@
 class Admin::ProductsController < Admin::AdminController
+  include ImageAttachmentConcern
+  
   before_action :set_admin_product, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/products
@@ -59,12 +61,6 @@ class Admin::ProductsController < Admin::AdminController
       format.html { redirect_to admin_products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def delete_image_attachment
-    @image = ActiveStorage::Blob.find_signed(params[:id])
-    @image.attachments.first.purge
-    render json: {}, status: :ok
   end
 
   private

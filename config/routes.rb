@@ -21,8 +21,14 @@ Rails.application.routes.draw do
         delete :delete_image_attachment
       end
     end
+
+    resources :collections, except: :show do
+      member do
+        delete :delete_image_attachment
+      end
+    end
+
     resources :orders
-    resources :collections
     resources :dashboard, only: [:index]
   end
 
@@ -30,7 +36,7 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
 
   resources :products, only: [:index, :show]
-  resources :orders
+  resources :orders, only: [:index, :show]
 
   #get '*path' => redirect('/')
   # catch all but excluding active storage resources

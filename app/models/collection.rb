@@ -9,5 +9,5 @@ class Collection < ApplicationRecord
 
   has_one_attached :image
 
-  enum type: [:automatic, :manual]
+  enum condition_type: [:automatic, :manual]
 end

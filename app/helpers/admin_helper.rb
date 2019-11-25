@@ -8,6 +8,9 @@ module AdminHelper
       when 'orders'
         subitems << {:title => 'All Orders', :link => admin_orders_path}
         #subitems << {:title => 'Add Order', :link => new_admin_order_path}
+      when 'collections'
+        subitems << {:title => 'All Collections', :link => admin_collections_path}
+        subitems << {:title => 'Add Collection', :link => new_admin_collection_path}
     end
 
     return subitems
