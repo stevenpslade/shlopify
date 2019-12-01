@@ -19,7 +19,7 @@
       <tbody class="align-middle">
         <% @admin_collections.each do |admin_collection| %>
           <tr class="h-12">
-            <td class="p-2 border-t border-gray-300">
+            <td class="p-2 border-t border-gray-300 w-20">
               <%= admin_collection.image.attached? ? 
                 image_tag(admin_collection.image, class: "block h-12 w-12 object-contain border border-gray-300") : '' %>
             </td>
@@ -32,6 +32,8 @@
               <% @tags_by_collection_id[admin_collection.id].each do |tag| %>
                 <%= render 'components/pill', 
                   text: tag.name,
+                  rounded: 'rounded',
+                  padding_style: 'px-2 py-1',
                   status: ''
                 %>
               <% end %>

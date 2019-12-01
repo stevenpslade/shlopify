@@ -31,7 +31,7 @@ class Admin::CollectionsController < Admin::AdminController
 
     respond_to do |format|
       if @admin_collection.save
-        format.html { redirect_to @admin_collection, notice: 'Collection was successfully created.' }
+        format.html { redirect_to edit_admin_collection_url(@admin_collection), notice: 'Collection was successfully created.' }
         format.json { render :show, status: :created, location: @admin_collection }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class Admin::CollectionsController < Admin::AdminController
   def update
     respond_to do |format|
       if @admin_collection.update(admin_collection_params)
-        format.html { redirect_to @admin_collection, notice: 'Collection was successfully updated.' }
+        format.html { redirect_to edit_admin_collection_url(@admin_collection), notice: 'Collection was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_collection }
       else
         format.html { render :edit }
@@ -72,7 +72,7 @@ class Admin::CollectionsController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_collection_params
-      params.require(:collecion)
+      params.require(:collection)
         .permit(
           :title,
           :description,

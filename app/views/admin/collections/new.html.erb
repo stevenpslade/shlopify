@@ -1,5 +1,5 @@
-<h1>New Admin Collection</h1>
+<%= render 'components/header', 
+  header_body: 'Add Collection'
+%>
 
 <%= render 'form', admin_collection: @admin_collection %>
-
-<%= link_to 'Back', admin_collections_path %>
