@@ -10,4 +10,13 @@ class Collection < ApplicationRecord
   has_one_attached :image
 
   enum condition_type: [:automatic, :manual]
+
+  class << self
+
+    def get_collection_tags_from_collections(collections)
+      collection_ids = collections.map(&:id)
+      CollectionTag.where(collection_id: collection_ids)
+    end
+    
+  end
 end
