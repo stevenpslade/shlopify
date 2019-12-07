@@ -1,6 +1,5 @@
 class Product < ApplicationRecord
   include Taggable
-  after_save :save_tags
 
   belongs_to :store
   
@@ -17,4 +16,12 @@ class Product < ApplicationRecord
   validates :store_id, presence: true
   validates :title, presence: true, length: { maximum: 65 }
   validates :price, presence: true
+
+  def save_tag_relation(tag_id)
+    Tagging.new({
+      tag_id: tag_id,
+      store_id: store_id,
+      product_id: id
+    }).save!
+  end
 end

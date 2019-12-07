@@ -1,4 +1,5 @@
 class Collection < ApplicationRecord
+  include Taggable
   belongs_to :store
 
   has_many   :collection_products
@@ -10,6 +11,13 @@ class Collection < ApplicationRecord
   has_one_attached :image
 
   enum condition_type: [:automatic, :manual]
+
+  def save_tag_relation(tag_id)
+    CollectionTag.new({
+      collection_id: id,
+      tag_id: tag_id
+    }).save!
+  end
 
   class << self
 

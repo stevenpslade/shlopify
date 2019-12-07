@@ -4,6 +4,7 @@ module Taggable
   included do
     has_many :taggings
     has_many :tags, through: :taggings
+    after_save :save_tags, unless: :is_store?
   end
 
   def tag_names
@@ -28,11 +29,7 @@ module Taggable
     tag_names.split(',').each do |name|
       tag = Tag.find_or_create_by(name: name.strip)
       if !tags.exists?(tag.id)
-        Tagging.new({
-          tag_id: tag.id,
-          store_id: self.store_id,
-          product_id: self.id
-        }).save!
+        save_tag_relation(tag.id)
       end
     end
 
@@ -44,5 +41,9 @@ module Taggable
     tags.each do |tag|
       tags.destroy(tag) unless names.include?(tag.name)
     end
+  end
+
+  def is_store?
+    self.class.name == 'Store'
   end
 end

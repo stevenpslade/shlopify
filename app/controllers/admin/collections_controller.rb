@@ -76,7 +76,8 @@ class Admin::CollectionsController < Admin::AdminController
         .permit(
           :title,
           :description,
-          :image
+          :image,
+          :tag_names
         )
     end
 end

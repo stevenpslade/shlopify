@@ -8,7 +8,7 @@ class Store < ApplicationRecord
 
   validates :subdomain, presence: true, length: { maximum: 255 },
                         uniqueness: { case_sensitive: false }, 
-                        exclusion: { in: %w( support blog www billing help api ), message: "%{value} is reserved." }
+                        exclusion: { in: %w( support blog www billing help api dev ), message: "%{value} is reserved." }
 
   VALID_SUBDOMAIN_REGEX = /\A[A-Za-z0-9-]+\z/
   validates :subdomain, format: { with: VALID_SUBDOMAIN_REGEX, 
