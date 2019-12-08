@@ -19,10 +19,6 @@ module Taggable
   #   Tag.find_by!(name: name).posts
   # end
 
-  def tag_list
-    tags.map(&:name).join(', ')
-  end
-
   private
 
   def save_tags

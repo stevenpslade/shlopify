@@ -36,6 +36,16 @@
           <%= f.text_field :tag_names_entry, class: "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
         </div>
         <%= f.text_field :tag_names, class: "hidden" %>
+        <div id="tagContainer">
+          <% admin_collection.tags.each do |tag| %>
+            <%= render 'components/pill', 
+              text: "&times; #{tag.name}".html_safe,
+              rounded: 'rounded',
+              padding_style: 'px-2 py-1',
+              status: ''
+            %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
@@ -86,3 +96,69 @@
 <% end %>
 
 <%= javascript_pack_tag 'admin/collections' %>
+
+<script>
+class TagList {
+  constructor(tagList, tagNamesInputId, tagNamesEntryInputId) {
+    this.tagArray = tagList.split(',');
+
+    this.tagNamesInput = document.getElementById(tagNamesInputId);
+    this.tagNamesEntryInput = document.getElementById(tagNamesEntryInputId);
+
+    this.watchInputField();
+  }
+
+  assignInputValue = () => {
+    this.tagNamesInput.value = this.tagArray.join(',');
+
+    console.log('New Input Value: ', this.tagNamesInput.value);
+  }
+
+  watchInputField = () => {
+    this.tagNamesEntryInput.oninput = e => {
+      let inputVal = e.target.value;
+      let lastChar = inputVal.charAt(inputVal.length - 1);
+      if (lastChar === ',') {
+        this.addTag(this.cleanTagName(inputVal));
+        this.tagNamesEntryInput.value = '';
+      }
+    }
+  }
+
+  addTag = name => {
+    if (this.tagArray.indexOf(name) === -1 && name !== '') {
+      this.tagArray.push(name);
+      this.assignInputValue();
+      this.addTagToContainer(name);
+    }
+  }
+
+  removeFromTagArray = name => {
+    let tagIndex = this.tagArray.indexOf(name);
+    if (tagIndex) {
+      this.tagArray.splice(tagIndex, 1);
+      this.assignInputValue();
+    }
+  }
+
+  cleanTagName = name => {
+    // removes white spaces and trailing/leading commas
+    return name.replace(/(^,)|(,$)/g, '').trim();
+  }
+
+  addTagToContainer = name => {
+    let span = document.createElement('span');
+    span.className = 'text-gray-700 bg-gray-200 rounded px-2 py-1 shadow text-center mr-2 tracking-wide leading-none text-xs font-semibold select-none';
+    span.innerHTML = "&times; " + name;
+
+    const tagContainer = document.getElementById('tagContainer');
+    tagContainer.appendChild(span);
+  }
+}
+
+const tagList = new TagList(
+  '<%= admin_collection.tag_names %>',
+  'collection_tag_names',
+  'collection_tag_names_entry'
+);
+</script>
