@@ -26,6 +26,14 @@
         </div>
       </div>
     </div>
+
+    <div class="bg-white shadow rounded-lg flex flex-col p-8 mb-5">
+      <div class="md:flex md:items-center mb-6">
+        <% @collection_products.each do |product| %>
+          <%= product.title %><br/>
+        <% end %>
+      </div>
+    </div>
   </div>
 
   <div class="px-3 xl:px-3 w-full max-w-3xl mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-2/6">
@@ -34,7 +42,7 @@
         <%= render 'components/form/tag_field', f: f, record: admin_collection %>
       </div>
     </div>
-    
+
     <div class="bg-white shadow rounded-lg flex flex-col p-8 mb-5">
       <div class="mb-1">
         <div id="collectionImageLabel" class="flex justify-between">

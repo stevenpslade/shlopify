@@ -2,9 +2,11 @@ class Collection < ApplicationRecord
   include Taggable
   belongs_to :store
 
+  # for manual adding of products to collection
   has_many   :collection_products
   has_many   :products, through: :collection_products
 
+  # for referencing products through tags
   has_many   :collection_tags
   has_many   :tags, through: :collection_tags
 

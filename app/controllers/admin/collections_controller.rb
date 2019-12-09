@@ -22,6 +22,9 @@ class Admin::CollectionsController < Admin::AdminController
 
   # GET /admin/collections/1/edit
   def edit
+    tag_ids = @admin_collection.tags.map(&:id)
+    product_ids = Tagging.where(tag_id: tag_ids, store_id: @current_store.id).map(&:product_id)
+    @collection_products = Product.where(id: product_ids, active: true)
   end
 
   # POST /admin/collections
