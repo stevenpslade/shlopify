@@ -2,6 +2,7 @@
 <% rounded = local_assigns.fetch(:rounded, 'rounded-full') %>
 <% padding_style = local_assigns.fetch(:padding_style, 'px-4 py-2') %>
 <% misc_style = local_assigns.fetch(:misc_style, '') %>
+
 <span class="<%= "#{get_pill_status_style(status, border)} #{rounded} #{padding_style} #{misc_style}" %> shadow text-center mr-2 tracking-wide leading-none text-xs font-semibold select-none">
   <%= text %>
 </span>

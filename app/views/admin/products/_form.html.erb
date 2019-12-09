@@ -69,12 +69,7 @@
 
     <div class="bg-white shadow rounded-lg flex flex-col p-8 mb-5">
       <div class="mb-1">
-        <div>
-          <%= f.label 'Tags', class: "block text-purple-500 font-normal mb-1 md:mb-0 pr-4" %>
-        </div>
-        <div>
-          <%= f.text_field :tag_names, class: "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" %>
-        </div>
+        <%= render 'components/form/tag_field', f: f, record: admin_product %>
       </div>
     </div>
 

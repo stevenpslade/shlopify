@@ -8,7 +8,7 @@ module Taggable
   end
 
   def tag_names
-    @tag_names.blank? ? tags.map(&:name).join(', ') : @tag_names
+    @tag_names.blank? ? tags.map(&:name).join(',') : @tag_names
   end
   
   def tag_names=(names)
