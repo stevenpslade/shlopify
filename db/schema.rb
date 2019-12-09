@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_02_061845) do
+ActiveRecord::Schema.define(version: 2019_12_09_022754) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_12_02_061845) do
     t.datetime "updated_at", null: false
     t.integer "store_id"
     t.integer "condition_type", default: 0
+    t.boolean "active", default: true
     t.index ["store_id"], name: "index_collections_on_store_id"
   end
 
