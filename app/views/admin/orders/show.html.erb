@@ -8,13 +8,11 @@
 <div class="flex px-6 pb-2" style="margin-top: -0.5rem;">
   <%= render 'components/pill', 
     text: "Payment #{@admin_order.payment_status.capitalize}",
-    status: @admin_order.payment_status,
-    border: true
+    status: @admin_order.payment_status
   %>
   <%= render 'components/pill', 
     text: @admin_order.fulfillment_status.capitalize,
-    status: @admin_order.fulfillment_status,
-    border: true
+    status: @admin_order.fulfillment_status
   %>
 </div>
 
@@ -38,7 +36,7 @@
     <div class="w-1/2 self-end bg-gray-200 rounded-lg flex justify-between p-4">
       <span class="font-medium text-gray-600">Total</span>
       <%= render 'components/pill', 
-        text: "$#{@admin_order.total}",
+        text: "$#{number_with_precision(@admin_order.total, precision: 2)}",
         status: 'success'
       %>
     </div>

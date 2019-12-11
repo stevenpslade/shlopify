@@ -28,10 +28,18 @@
     </div>
 
     <div class="bg-white shadow rounded-lg flex flex-col p-8 mb-5">
-      <div class="md:flex md:items-center mb-6">
-        <% @collection_products.each do |product| %>
-          <%= product.title %><br/>
-        <% end %>
+      <div class="flex flex-row flex-wrap">
+        <span class="text-purple-500 font-normal w-full">Products</span>
+        <div class="flex flex-wrap w-full border border-gray-300 rounded-sm">
+          <% @collection_products.each do |product| %>
+            <%= link_to(edit_admin_product_path(product), class: "flex items-center w-full first:border-t-0 border-t p-3 hover:bg-gray-100") do %>
+              <%= product.images.attached? ? 
+                image_tag(product.images.first, class: "block h-12 w-12 object-contain border bg-white border-gray-300") : '' 
+              %>
+              <span class="ml-2 text-sm font-semibold text-gray-900"><%= product.title %></span>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

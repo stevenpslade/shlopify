@@ -22,7 +22,8 @@
           <tr class="h-12">
             <td class="p-2 border-t border-gray-300">
               <%= admin_product.images.attached? ? 
-                image_tag(admin_product.images.first, class: "block h-12 w-12 object-contain border border-gray-300") : '' %>
+                image_tag(admin_product.images.first, class: "block h-12 w-12 object-contain border border-gray-300") : '' 
+              %>
             </td>
             <td class="p-2 border-t border-gray-300">
               <span class="text-gray-600 hover:text-gray-900">
