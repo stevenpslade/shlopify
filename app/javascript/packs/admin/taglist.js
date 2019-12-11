@@ -32,7 +32,7 @@ class TagList {
 
   removeFromTagArray = name => {
     let tagIndex = this.tagArray.indexOf(name);
-    if (tagIndex) {
+    if (tagIndex !== -1) {
       this.tagArray.splice(tagIndex, 1);
       this.assignInputValue();
     }
