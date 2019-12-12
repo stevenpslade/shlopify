@@ -80,6 +80,7 @@ class Admin::CollectionsController < Admin::AdminController
           :title,
           :description,
           :image,
+          :category,
           :tag_names
         )
     end
