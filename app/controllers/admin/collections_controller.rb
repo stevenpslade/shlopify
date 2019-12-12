@@ -17,7 +17,7 @@ class Admin::CollectionsController < Admin::AdminController
 
   # GET /admin/collections/new
   def new
-    @admin_collection = Collection.new
+    @admin_collection = @current_store.collections.new
   end
 
   # GET /admin/collections/1/edit
@@ -30,7 +30,7 @@ class Admin::CollectionsController < Admin::AdminController
   # POST /admin/collections
   # POST /admin/collections.json
   def create
-    @admin_collection = Collection.new(admin_collection_params)
+    @admin_collection = @current_store.collections.new(admin_collection_params)
 
     respond_to do |format|
       if @admin_collection.save
