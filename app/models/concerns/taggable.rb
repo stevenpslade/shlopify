@@ -22,7 +22,7 @@ module Taggable
   private
 
   def save_tags
-    tag_names.split(',').each do |name|
+    @tag_names.split(',').each do |name|
       tag = Tag.find_or_create_by(name: name.strip)
       if !tags.exists?(tag.id)
         save_tag_relation(tag.id)
@@ -33,7 +33,7 @@ module Taggable
   end
 
   def clean_tags
-    names = tag_names.split(',').map { |n| n.strip }
+    names = @tag_names.split(',').map { |n| n.strip }
     tags.each do |tag|
       tags.destroy(tag) unless names.include?(tag.name)
     end

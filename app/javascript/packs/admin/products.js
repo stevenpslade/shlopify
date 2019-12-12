@@ -17,12 +17,12 @@ setupReader = file => {
   reader.readAsDataURL(file);
 }
 
-document.getElementById('product_images').onchange = () => {
+document.getElementById('product_images').onchange = (e) => {
   let imagePreviewContainer = document.getElementById('imagePreviewContainer');
   imagePreviewContainer.innerHTML = '';
   imagePreviewContainer.classList.remove('hidden');
-  for (var i = 0; i < this.files.length; i++) {
-    setupReader(this.files[i]);
+  for (var i = 0; i < e.target.files.length; i++) {
+    setupReader(e.target.files[i]);
   }
 };
 

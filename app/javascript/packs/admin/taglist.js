@@ -2,7 +2,7 @@ class TagList {
   constructor() {
     this.tagNamesInput = document.getElementById('tag_names_input');
     this.tagNamesEntryInput = document.getElementById('tag_names_entry_input');
-    this.tagArray = this.tagNamesInput.value.split(',');
+    this.tagArray = this.tagNamesInput.value === '' ? [] : this.tagNamesInput.value.split(',');
 
     this.watchInputField();
   }
