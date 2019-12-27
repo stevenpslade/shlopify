@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
     resources :orders
     resources :dashboard, only: [:index]
+    resources :settings, only: [:index]
   end
 
   resources :account_activations, only: [:edit]

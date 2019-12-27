@@ -1,0 +1,13 @@
+<%= render 'components/header', header_body: 'Settings' %>
+
+<div class="px-6 xl:px-6 w-full mx-auto lg:ml-0 lg:mr-auto xl:mx-0">
+  <div class="bg-white shadow rounded-lg flex flex-col justify-between p-6 mb-5 w-2/5 h-48">
+    <span class="font-medium tracking-wide">Payments</span>
+    <span class="font-light">
+      Accept payments through your store using <a href="https://stripe.com" class="text-purple-500">Stripe</a>. Connecting is easy and payment management stays secure.</span>
+    <%= link_to 'Connect with Stripe', 
+      '#', 
+      class: "w-auto ml-auto text-center shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white text-sm font-medium py-2 px-4 rounded" 
+    %>
+  </div>
+</div>
