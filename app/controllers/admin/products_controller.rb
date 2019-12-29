@@ -43,7 +43,8 @@ class Admin::ProductsController < Admin::AdminController
   # PATCH/PUT /admin/products/1.json
   def update
     respond_to do |format|
-      if @admin_product.update(admin_product_params)
+      if @admin_product.update(admin_product_params.except(:images))
+        @admin_product.images.attach(params[:product][:images])
         format.html { redirect_to edit_admin_product_url(@admin_product), notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_product }
       else
