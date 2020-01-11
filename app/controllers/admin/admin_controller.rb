@@ -1,5 +1,6 @@
 class Admin::AdminController < ApplicationController
   before_action :require_login
+  before_action :require_store_set
   before_action :require_store_ownership
 
   layout "admin"
@@ -10,6 +11,12 @@ class Admin::AdminController < ApplicationController
         store_location
         flash[:danger] = "Please log in."
         redirect_to login_url
+      end
+    end
+
+    def require_store_set
+      unless @current_store
+        redirect_to subdomain: @current_user.stores.first.subdomain
       end
     end
     
