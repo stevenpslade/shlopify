@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get 'products/index'
   get 'products/show'
+  
+  get 'stripe/connect', to: 'stripe#connect', as: :stripe_connect
 
   get  '/signup', to: 'admin/users#new'
   post '/signup', to: 'admin/users#create'
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'admin/sessions#create'
   get    '/logout',  to: 'admin/sessions#destroy'
   delete '/logout',  to: 'admin/sessions#destroy'
+
 
   namespace :admin do
     resources :users
