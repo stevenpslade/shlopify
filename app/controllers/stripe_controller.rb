@@ -16,8 +16,10 @@ class StripeController < ApplicationController
       raise response.error_description if response.error
       current_store.stripe_user_id = response.stripe_user_id
       current_store.save!
+
+      redirect_to admin_settings_url(subdomain: current_store.subdomain, notice: 'Stripe successfully connected!')
     rescue StandardError => e
-      redirect_to admin_settings_url, notice: e.message
+      redirect_to admin_settings_url(subdomain: current_store.subdomain, notice: e.message)
     end
   end
 end
