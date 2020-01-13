@@ -1,6 +1,6 @@
 <!-- Vertical Nav -->
 <div class="flex-1 h-full overflow-y-auto scrolling-touch pb-6 block border-r border-gray-200 bg-white">
-  <nav id="nav" class="px-6 pt-6 overflow-y-auto text-sm lg:py-8 lg:pl-6 lg:pr-8 sticky?lg:h-(screen-16)">
+  <nav id="nav" class="flex flex-col justify-start h-full px-6 pt-6 overflow-y-auto text-sm lg:py-8 lg:pl-6 lg:pr-8 sticky?lg:h-(screen-16)">
     <div class="mb-10">
       <%= link_to(admin_dashboard_index_path, class: "vertical-nav-item #{'active' if current_page?(admin_dashboard_index_path)}") do %>
         <span class="ml-3">Home</span>
@@ -16,14 +16,20 @@
       <% end %>
     </div>
 
-    <% if !current_page?(admin_dashboard_index_path) %>
+    <% if !current_page?(admin_dashboard_index_path) && !current_page?(admin_settings_path) %>
       <% subitems = get_subitems_by_controller(controller.controller_name) %>
-      <div class="mb-8">
+      <div>
         <h5 class="mb-3 lg:mb-2 text-gray-500 uppercase tracking-wide font-bold text-sm lg:text-xs">In This Section</h5>
         <ul>
           <%= render partial: "components/navigation/subitems", locals: {subitems: subitems} %>
         </ul>
       </div>
     <% end %>
+
+    <div class="mt-auto mb-10">
+      <%= link_to(admin_settings_path, class: "vertical-nav-item #{'active' if current_page?(admin_settings_path)}") do %>
+        <span class="ml-3">Settings</span>
+      <% end %>
+    </div>
   </nav>
 </div>

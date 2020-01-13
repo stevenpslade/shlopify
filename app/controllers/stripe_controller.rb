@@ -8,7 +8,6 @@ class StripeController < ApplicationController
     begin
       raise 'Error connecting Stripe account.' if current_store.stripe_user_id || !params[:code]
       Stripe.api_key = Rails.application.credentials.stripe[:private_key]
-      byebug
       response = Stripe::OAuth.token({
         grant_type: 'authorization_code',
         code: params[:code],

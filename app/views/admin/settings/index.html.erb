@@ -5,9 +5,15 @@
     <span class="font-medium tracking-wide">Payments</span>
     <span class="font-light">
       Accept payments through your store using <a href="https://stripe.com" class="text-purple-500">Stripe</a>. Connecting is easy and payment management stays secure.</span>
-    <%= link_to 'Connect with Stripe', 
-      stripe_button_link, 
-      class: "w-auto ml-auto text-center shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white text-sm font-medium py-2 px-4 rounded" 
-    %>
+    <% if !@current_store.stripe_user_id %>
+      <%= link_to 'Connect with Stripe', 
+        stripe_button_link, 
+        class: "w-auto ml-auto text-center shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white text-sm font-medium py-2 px-4 rounded" 
+      %>
+    <% else %>
+      <div class="w-auto ml-auto text-center shadow bg-green-300 text-white text-sm font-medium py-2 px-4 rounded">
+        Connected
+      </div>
+    <% end %>
   </div>
 </div>
