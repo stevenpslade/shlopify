@@ -30,7 +30,9 @@ class Admin::OrdersController < Admin::AdminController
   # POST /admin/orders.json
   def create
     @admin_order    = @current_store.orders.new(admin_order_params)
-    @order_products = @current_store.products.where(id: params[:order_products][:ids])
+    @order_products = @current_store.products
+      .where(id: params[:order_products][:ids])
+      .select('id, price, title')
     
     if @order_products.empty?
       @admin_order.errors.add(:order_products, 'At least one product must be selected.')
@@ -43,17 +45,22 @@ class Admin::OrdersController < Admin::AdminController
 
     respond_to do |format|
       if @admin_order.errors.empty? && @admin_order.save
-        OrderProduct.transaction do
-          @order_products.each do |product|
-            OrderProduct.new({
-              order_id: @admin_order.id,
-              product_id: product.id,
-              price: product.price,
-              title: product.title,
-              quantity: 1 # TODO: add quantity to order form
-            }).save!
-          end
+        order_products_insert = []
+        @order_products.each do |product|
+          op_hash = {
+            order_id: @admin_order.id,
+            product_id: product.id,
+            price: product.price,
+            title: product.title,
+            quantity: 1, # TODO: add quantity to order form
+            created_at: Time.now,
+            updated_at: Time.now
+          }
+    
+          order_products_insert << op_hash
         end
+
+        OrderProduct.insert_all(order_products_insert)
 
         format.html { redirect_to admin_order_url(@admin_order), notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: admin_order_url(@admin_order) }
@@ -80,17 +87,22 @@ class Admin::OrdersController < Admin::AdminController
 
     respond_to do |format|
       if @admin_order.errors.empty? && @admin_order.update(admin_order_params)
-        OrderProduct.transaction do
-          @order_products.each do |product|
-            OrderProduct.new({
-              order_id: @admin_order.id,
-              product_id: product.id,
-              price: product.price,
-              title: product.title,
-              quantity: 1 # TODO: add quantity to order form
-            }).save!
-          end
+        order_products_insert = []
+        @order_products.each do |product|
+          op_hash = {
+            order_id: @admin_order.id,
+            product_id: product.id,
+            price: product.price,
+            title: product.title,
+            quantity: 1, # TODO: add quantity to order form
+            created_at: Time.now,
+            updated_at: Time.now
+          }
+    
+          order_products_insert << op_hash
         end
+
+        OrderProduct.insert_all(order_products_insert)
         
         format.html { redirect_to admin_order_url(@admin_order), notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: admin_order_url(@admin_order) }
