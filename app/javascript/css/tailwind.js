@@ -13,5 +13,7 @@ module.exports = {
   variants: {
     borderWidth: ['responsive', 'first', 'hover', 'focus']
   },
-  plugins: []
+  plugins: [
+    require('@tailwindcss/ui'),
+  ],
 }
