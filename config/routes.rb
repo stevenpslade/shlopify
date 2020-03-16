@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # for store home page: go to products#index
+  get '/' => 'products#index', :constraints => { :subdomain => /.+/ }
   root 'static_pages#home'
   # used to redirect all requests to home for Coming Soon page
   #get '*path' => redirect('/')
