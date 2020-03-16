@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   # Pagy gem for pagination
   include Pagy::Backend
 
+  layout "store"
+
   private
     def set_current_store
       if (request.subdomains.first)

@@ -13,7 +13,9 @@
 
   <body>
     <div class="min-h-screen bg-white">
+      <%= render "components/#{@theme_path}/navigation/navbar" %>
       <%= yield %>
+      <%= render "components/#{@theme_path}/navigation/footer" %>
     </div>
   </body>
 </html>
