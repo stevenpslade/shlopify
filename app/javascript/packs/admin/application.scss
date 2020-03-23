@@ -1,0 +1,31 @@
+h1, h2, h3, h4, h5 {
+  @apply font-header;
+}
+
+.vertical-nav-item {
+  @apply flex items-center px-2 -mx-2 py-1 font-medium text-gray-600;
+}
+
+.vertical-nav-item:hover, .vertical-nav-item.active {
+  @apply text-gray-900;
+}
+
+.vertical-nav-subitem {
+  @apply px-2 -mx-2 py-1 relative block text-gray-600 font-medium;
+}
+
+.vertical-nav-subitem:hover {
+  @apply text-gray-900;
+}
+
+.vertical-nav-subitem.active {
+  @apply text-purple-600;
+}
+
+.vertical-nav-subitem.active span:first-child {
+  @apply opacity-25;
+}
+
+#gallery .image:hover .removeImage {
+  visibility: visible;
+}
