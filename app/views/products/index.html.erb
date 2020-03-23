@@ -1,18 +1,32 @@
   <div class="py-10">
     <header>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-4 lg:px-8">
         <h2 class="text-2xl font-bold leading-tight text-gray-900">
           Products
         </h2>
       </div>
     </header>
     <main>
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <!-- Replace with your content -->
-        <div class="px-4 py-8 sm:px-0">
-          <div class="border-4 border-dashed border-gray-200 rounded-lg h-96"></div>
-        </div>
-        <!-- /End replace -->
+      <div class="max-w-7xl mx-auto mt-5 sm:px-4 lg:px-8 mb-5 lg:grid lg:grid-cols-4 lg:gap-4">
+
+        <% @products.each do |product| %>
+          <%# <Product Component %>
+          <div class="bg-white shadow rounded flex flex-col overflow-hidden">
+            <%= product.images.attached? ? 
+              image_tag(product.images.first, class: "w-full h-48 object-contain") : '' 
+            %>
+            <div class="bg-gray-100 border-t border-gray-200 w-full flex flex-row justify-between py-4 px-2">
+              <div class="flex flex-col">
+                <div class="font-semibold"><%= product.title %></div>
+              </div>
+              <span class="items-center px-2.5 py-0.5 rounded-md text-sm font-medium leading-5 bg-black text-gray-100">
+                <%= "$#{number_with_precision(product.price, precision: 2)}" %>
+              </span>
+            </div>
+          </div>
+        <% end %>
+
+
       </div>
     </main>
   <div>
