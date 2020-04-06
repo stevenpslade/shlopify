@@ -1,0 +1,11 @@
+.product-show-container {
+  @apply h-auto py-8 px-32;
+  background-color: blue;
+}
+
+@screen md {
+  .product-show-container {
+    height: calc(100vh - 4rem);
+    background-color: red;
+  }
+}
