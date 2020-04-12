@@ -1,11 +1,50 @@
+// mobile and higher (sm)
 .product-show-container {
-  @apply h-auto py-8 px-32;
-  background-color: blue;
+  @apply flex flex-col justify-around h-auto py-10 px-2 text-gray-900 font-normal;
+
+  .details, .carousel {
+    @apply my-1 flex flex-col;
+  }
+
+  .title {
+    @apply text-3xl font-bold leading-tight mb-5;
+  }
+
+  .priceContainer {
+    @apply flex mb-5;
+
+    .price {
+      @apply text-lg font-normal;
+    }
+  }
+
+  .description {
+    @apply tracking-tight font-light mb-5;
+  }
 }
 
+// md screens and higher
 @screen md {
   .product-show-container {
+    @apply flex-row px-16;
     height: calc(100vh - 4rem);
-    background-color: red;
+
+    .details, .carousel {
+      @apply my-0 mx-2;
+    }
+
+    .carousel {
+      @apply w-7/12;
+    }
+
+    .details {
+      @apply flex-1;
+    }
+  }
+}
+
+@screen lg {
+  .product-show-container {
+    @apply px-32;
   }
 }

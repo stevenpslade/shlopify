@@ -1,2 +1,41 @@
 <div class="product-show-container">
+  <div
+    class="carousel"
+    x-data="{ activeImage: '<%= @product_image_urls[0] %>', images: <%= @product_image_urls %> }"
+  >
+    <div class="h-64 md:flex-1 flex justify-center items-center overflow-hidden bg-white rounded object-contain border border-gray-200 mb-2">
+      <template x-for="image in images" :key="image">
+        <img
+          class="object-contain h-full md:h-auto"
+          :src="image"
+          x-show.transition.opacity="activeImage === image"
+        />
+      </template>
+    </div>
+    <div class="flex flex-wrap md:h-32">
+      <template x-for="image in images" :key="image">
+        <img
+          class="h-12 mx-1 bg-white rounded object-contain cursor-pointer border"
+          :src="image"
+          :class="{
+            'border-gray-600': activeImage === image,
+            'border-gray-200': activeImage !== image,
+          }"
+          x-on:click="activeImage = image"
+        />
+      </template>
+    </div>
+  </div>
+
+  <div class="details">
+    <div class="title"><%= @product.title %></div>
+    <div class="priceContainer">
+      <span class="price"><%= format_price(@product.price) %></span>
+    </div>
+    <div class="description"><%= @product.description %></div>
+    <%# ADD TO CART Button %>
+    <button type="button" class="mt-auto w-full justify-center inline-flex items-center px-6 py-3 border border-transparent text-base tracking-wider leading-6 font-semibold rounded text-white bg-gray-900 hover:bg-gray-600 focus:outline-none focus:border-gray-700 active:bg-gray-700 transition ease-in-out duration-150">
+      ADD TO CART
+    </button>
+  </div>
 </div>
