@@ -2,6 +2,9 @@ class ProductsController < ApplicationController
   before_action :set_product, only: :show
 
   def index
+    # TODO:
+    # - pagination
+    # - active, quantity > 0, etc.
     @products = @current_store.products
   end
 
