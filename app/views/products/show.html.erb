@@ -3,7 +3,7 @@
     class="carousel"
     x-data="{ activeImage: '<%= @product_image_urls[0] %>', images: <%= @product_image_urls %> }"
   >
-    <div class="h-64 md:flex-1 flex justify-center items-center overflow-hidden bg-white rounded object-contain border border-gray-200 mb-2">
+    <div class="h-64 md:flex-1 flex justify-center items-center overflow-hidden bg-white rounded shadow-sm object-contain border border-gray-200 mb-2">
       <template x-for="image in images" :key="image">
         <img
           class="object-contain h-full md:h-auto"

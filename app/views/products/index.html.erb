@@ -1,33 +1,35 @@
 <div class="py-8">
   <header>
-    <div class="max-w-7xl mx-auto px-4 sm:px-4 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-4 md:px-8">
       <h2 class="text-2xl font-bold leading-tight text-gray-900">
         Products
       </h2>
     </div>
   </header>
   <main>
-    <div class="max-w-7xl mx-auto sm:px-4 lg:px-8 m-5 lg:grid lg:grid-cols-4 lg:gap-4">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 m-5 md:grid md:grid-cols-4 md:gap-4">
 
       <% @products.each do |product| %>
         <%# Product Component %>
-        <div class="flex flex-col overflow-hidden">
-          <%= product.images.attached? ? 
-            image_tag(product.images.first, class: "w-full h-48 bg-white rounded object-contain border border-gray-200") : '' 
-          %>
-          <div class="w-full flex flex-row justify-between items-start py-2">
-            <div class="flex flex-col justify-start">
-              <div class="text-sm font-semibold"><%= product.title %></div>
-              <div class="text-sm font-light text-gray-400">Door Mat</div>
-            </div>
-            <div class="text-sm font-semibold">
-              <%= format_price(product.price) %>
+        <%= link_to(product_path(product)) do %>
+          <div class="flex flex-col overflow-hidden">
+            <%= product.images.attached? ? 
+              image_tag(product.images.first, class: "w-full h-48 bg-white rounded object-contain border border-gray-200") : '' 
+            %>
+            <div class="w-full flex flex-row justify-between items-start py-2">
+              <div class="flex flex-col justify-start">
+                <div class="text-sm font-semibold"><%= product.title %></div>
+                <div class="text-sm font-light text-gray-400">Door Mat</div>
+              </div>
+              <div class="text-sm font-semibold">
+                <%= format_price(product.price) %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
 
 
     </div>
   </main>
-<div>
+</div>
