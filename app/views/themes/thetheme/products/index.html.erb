@@ -1,2 +1,8 @@
-<h1>Products#index</h1>
-<p>Find me in app/views/themes/thetheme/products/index.html.erb</p>
+<div class="py-8">
+  <%= render "components/#{@theme_path}/header",
+    header_body: 'All'
+  %>
+  <%= render "components/#{@theme_path}/product/grid",
+    products: @products
+  %>
+</div>

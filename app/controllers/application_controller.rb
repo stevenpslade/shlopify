@@ -1,9 +1,6 @@
 class ApplicationController < ActionController::Base
-  before_action :set_current_store, :set_theme
+  before_action :set_current_store, :set_theme, :set_view_path
   before_action :set_collections, if: @current_store
-
-  # prepend view path with theme folder
-  prepend_view_path "app/views/#{@theme_path}"
 
   protect_from_forgery with: :exception
   include Admin::SessionsHelper
@@ -28,6 +25,11 @@ class ApplicationController < ActionController::Base
     def set_theme
       # TODO: store 'thetheme' in theme table and relate to store
       @theme_path = 'themes/thetheme'
+    end
+
+    # prepend view path with theme folder
+    def set_view_path
+      prepend_view_path "app/views/#{@theme_path}"
     end
 
     def set_collections

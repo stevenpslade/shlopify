@@ -1,0 +1,24 @@
+<main>
+  <div class="max-w-7xl mx-auto px-16 md:px-8 m-5 md:grid md:grid-cols-4 md:gap-4">
+    <% products.each do |product| %>
+      <% link_path = local_assigns[:collection] ? collection_product_path(@collection, product) : product_path(product) %>
+      <%# Product Component %>
+      <%= link_to(link_path) do %>
+        <div class="flex flex-col">
+          <%= product.images.attached? ? 
+            image_tag(product.images.first, class: "w-full h-48 bg-white shadow rounded object-contain") : '' 
+          %>
+          <div class="w-full flex flex-row justify-between items-start py-2">
+            <div class="flex flex-col justify-start">
+              <div class="text-sm font-semibold"><%= product.title %></div>
+              <div class="text-sm font-light text-gray-400">Door Mat</div>
+            </div>
+            <div class="text-sm font-semibold">
+              <%= format_price(product.price) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</main>

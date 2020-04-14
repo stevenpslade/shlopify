@@ -1,0 +1,7 @@
+<div class="py-8">
+  <%= render "components/#{@theme_path}/header", header_body: @collection.title %>
+  <%= render "components/#{@theme_path}/product/grid", 
+    products: @products,
+    collection: @collection
+  %>
+</div>
