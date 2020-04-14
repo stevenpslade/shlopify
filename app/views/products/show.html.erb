@@ -1,27 +1,34 @@
+<%= content_for(:body_attributes, 'data-turbolinks=false') %>
+
 <div class="product-show-container">
   <div
     class="carousel"
-    x-data="{ activeImage: '<%= @product_image_urls[0] %>', images: <%= @product_image_urls %> }"
+    x-data="{
+      activeImageIndex: 0,
+      images: <%= @product_image_urls %>
+    }"
   >
     <div class="h-64 md:flex-1 flex justify-center items-center overflow-hidden bg-white rounded shadow-sm object-contain border border-gray-200 mb-2">
-      <template x-for="image in images" :key="image">
+      <template x-for="(carouselImage, index) in images" :key="index">
         <img
           class="object-contain h-full md:h-auto"
-          :src="image"
-          x-show.transition.opacity="activeImage === image"
+          :src="carouselImage"
+          x-show.transition.opacity="activeImageIndex === index"
+          data-turbolinks="false"
         />
       </template>
     </div>
     <div class="flex flex-wrap md:h-32">
-      <template x-for="image in images" :key="image">
+      <template x-for="(thumbnail, index) in images" :key="index">
         <img
           class="h-12 mx-1 bg-white rounded object-contain cursor-pointer border"
-          :src="image"
+          :src="thumbnail"
           :class="{
-            'border-gray-600': activeImage === image,
-            'border-gray-200': activeImage !== image,
+            'border-gray-600': activeImageIndex === index,
+            'border-gray-200': activeImageIndex !== index,
           }"
-          x-on:click="activeImage = image"
+          x-on:click="activeImageIndex = index"
+          data-turbolinks="false"
         />
       </template>
     </div>

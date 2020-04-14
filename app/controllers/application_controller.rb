@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  before_action :set_current_store, :get_theme
+  before_action :set_current_store, :set_theme
+  before_action :set_collections, if: @current_store
 
   # prepend view path with theme folder
   prepend_view_path "app/views/#{@theme_path}"
@@ -24,8 +25,12 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def get_theme
+    def set_theme
       # TODO: store 'thetheme' in theme table and relate to store
       @theme_path = 'themes/thetheme'
+    end
+
+    def set_collections
+      @collections = @current_store.collections.where(active: true, category: true)
     end
 end

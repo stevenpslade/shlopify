@@ -7,6 +7,11 @@ Rails.application.routes.draw do
 
   get 'products/index'
   get 'products/show'
+
+  resources :collections, only: [:index, :show] do
+    resources :products, only: :show
+  end
+
   
   get 'stripe/connect', to: 'stripe#connect', as: :stripe_connect
 

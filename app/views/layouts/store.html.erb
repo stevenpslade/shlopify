@@ -15,7 +15,7 @@
     <%# stylesheet_pack_tag '#{@theme}/application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body <%= yield(:body_attributes) %>>
     <div class="min-h-screen bg-gray-50">
       <%= render "components/#{@theme_path}/navigation/navbar" %>
       <%= yield %>

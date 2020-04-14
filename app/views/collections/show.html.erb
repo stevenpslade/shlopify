@@ -2,7 +2,7 @@
   <header>
     <div class="max-w-7xl mx-auto px-4 sm:px-4 md:px-8">
       <h2 class="text-2xl font-bold leading-tight text-gray-900">
-        All
+        <%= @collection.title %>
       </h2>
     </div>
   </header>
@@ -11,7 +11,7 @@
 
       <% @products.each do |product| %>
         <%# Product Component %>
-        <%= link_to(product_path(product)) do %>
+        <%= link_to(collection_product_path(@collection, product)) do %>
           <div class="flex flex-col">
             <%= product.images.attached? ? 
               image_tag(product.images.first, class: "w-full h-48 bg-white shadow rounded object-contain") : '' 
