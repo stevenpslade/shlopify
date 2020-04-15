@@ -14,7 +14,6 @@
           class="object-contain h-full md:h-auto"
           :src="carouselImage"
           x-show.transition.opacity="activeImageIndex === index"
-          data-turbolinks="false"
         />
       </template>
     </div>
@@ -28,7 +27,6 @@
             'border-gray-200': activeImageIndex !== index,
           }"
           x-on:click="activeImageIndex = index"
-          data-turbolinks="false"
         />
       </template>
     </div>
