@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'carts/show'
   # for store home page: go to products#index
   get '/' => 'products#index', :constraints => { :subdomain => /.+/ }
   root 'static_pages#home'
@@ -10,6 +11,11 @@ Rails.application.routes.draw do
 
   resources :collections, only: [:index, :show] do
     resources :products, only: :show
+  end
+
+  resource :cart, only: :show do
+    post :add
+    post :remove
   end
 
   

@@ -8,7 +8,7 @@ class Admin::SessionsController < Admin::AdminController
   def create
     user = Admin::User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
-      # temporarily not carring about account activation
+      # temporarily not caring about account activation
       # if user.activated?
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)

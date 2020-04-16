@@ -3,10 +3,11 @@ class ApplicationController < ActionController::Base
   before_action :set_collections, if: @current_store
 
   protect_from_forgery with: :exception
-  include Admin::SessionsHelper
 
   # Pagy gem for pagination
   include Pagy::Backend
+  include Admin::SessionsHelper
+  include CartsHelper
 
   layout "store"
 
