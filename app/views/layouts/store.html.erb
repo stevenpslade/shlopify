@@ -19,6 +19,12 @@
     <div class="min-h-screen bg-gray-50">
       <%= render "components/#{@theme_path}/navigation/navbar" %>
       <%= yield %>
+
+      <%# Cart (eventually will be a component) %>
+      <div class="bg-gray-50 fixed inset-y-0 right-0 w-full md:w-2/5 flex  flex-col">
+        <%= cart_json %>
+      </div>
+
       <%= render "components/#{@theme_path}/navigation/footer" %>
     </div>
   </body>

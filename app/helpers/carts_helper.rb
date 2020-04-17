@@ -1,14 +1,22 @@
 module CartsHelper
   def cart
-    @cart ||= cookies[:cart].present? ? JSON.parse(cookies[:cart]) : {}
+    begin
+      @cart ||= cookies[:cart].present? ? JSON.parse(cookies[:cart]) : {}
+    rescue JSON::ParserError => e
+      # if something is wrong with the cookie we just clear everything
+      # not ideal to get rid of the user's cart data but most likely
+      # the cookie is corrupt due to user manipulation
+      @cart = {}
+    end 
   end
 
+  # Array of hashes [{product: Product1, quantity: 1}, {product: Product2, quantity: 1}]
   def cart_data
-    @cart_data ||= Product.where(id: cart.keys).map {|product| { product: product, quantity: cart[product.id.to_s] } }
+    @cart_data ||= @current_store.products.where(id: cart.keys).map { |product| { product: product, quantity: cart[product.id.to_s] } }
   end
 
   def cart_subtotal
-    cart_data.map {|entry| entry[:product].price * entry[:quantity]}.sum
+    cart_data.map { |data| data[:product].price * data[:quantity]}.sum
   end
 
   def update_cart(new_cart)
@@ -17,5 +25,28 @@ module CartsHelper
       expires: 10.days.from_now
     }
     cookies[:cart]
+  end
+
+  def cart_json
+    cart_hash = {}
+    products_hash = {}
+    cart_data.each do |data|
+      product = data[:product]
+      quantity = data[:quantity]
+
+      products_hash[product.id] = {
+        product_id: product.id,
+        quantity: quantity,
+        title: product.title,
+        image: url_for(product.images.first),
+        price: product.price,
+        line_price: product.price * quantity,
+      }
+    end
+
+    cart_hash[:products] = products_hash
+    cart_hash[:final_price] = cart_subtotal
+
+    JSON.generate(cart_hash)
   end
 end

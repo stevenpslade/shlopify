@@ -33,6 +33,7 @@ class ApplicationController < ActionController::Base
       prepend_view_path "app/views/#{@theme_path}"
     end
 
+    # Used for navbar
     def set_collections
       @collections = @current_store.collections.where(active: true, category: true)
     end

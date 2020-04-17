@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :products, only: :show
   end
 
-  resource :cart, only: :show do
+  resource :cart, only: [] do
     post :add
     post :remove
   end

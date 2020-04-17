@@ -1,13 +1,23 @@
 class CartsController < ApplicationController
-  def show
-  end
-
   def add
     product_id = params[:product_id].to_s
     modify_delta(product_id, +1)
 
-    # return json data of product added?
-    render json: {message: "Added #{product_id} to Cart!"}, status: :ok
+    product = @current_store.products.find(params[:product_id])
+    quantity = cart[product_id]
+
+    render(
+      json: {
+        product_id: product_id,
+        quantity: quantity,
+        title: product.title,
+        image: url_for(product.images.first),
+        price: product.price,
+        line_price: product.price * quantity,
+        final_price: cart_subtotal
+      },
+      status: :ok
+    )
   end
 
   def remove
