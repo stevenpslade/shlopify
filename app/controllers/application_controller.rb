@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_current_store, :set_theme, :set_view_path
-  before_action :set_collections, if: @current_store
+  before_action :set_collections, if: :current_store
 
   protect_from_forgery with: :exception
 
@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
           redirect_to root_url(subdomain: logged_in? ? @current_user.stores.first.subdomain : false)
         end
       end
+    end
+
+    def current_store
+      @current_store
     end
 
     def set_theme
