@@ -1,8 +1,11 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   theme: {
     fontFamily: {
-      'logo': 'Playfair Display',
-      'header': 'Rubik'
+      sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      logo: 'Playfair Display',
+      header: 'Rubik',
     },
     extend: {
       flex: {
