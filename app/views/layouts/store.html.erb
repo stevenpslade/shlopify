@@ -24,7 +24,7 @@
       <div
         id="cart"
         data-turbolinks-permanent
-        class="z-10 bg-white fixed inset-y-0 right-0 w-full md:w-1/3 flex flex-col"
+        class="z-20 bg-white fixed inset-y-0 right-0 w-full md:w-1/3 flex flex-col"
         x-data="{
           open: false,
           cart: <%= cart_json %>
@@ -32,6 +32,7 @@
         x-show="open"
         @open-cart.window="open = true"
         @click.away="open = false"
+        x-init="$watch('open', value => !value && $dispatch('close-cart'))"
 
         @add-product.window="
           const data = $event.detail;
@@ -61,8 +62,27 @@
         <span x-text="cart.final_price"></span>
       </div>
 
+      <%# Mask %>
+      <div
+        class="z-10 bg-gray-900-75 fixed inset-0"
+        x-data="{ show: false }"
+
+        x-show="show"
+        x-transition:enter="transform ease-out duration-300 transition"
+        x-transition:enter-start="opacity-0" 
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-100"
+        x-transition:leave-start="opacity-100" 
+        x-transition:leave-end="opacity-0"
+
+        @open-cart.window="show = true"
+        @close-cart.window="show = false"
+      ></div>
+
       <%# Added to Cart Alert Bar, will eventually be a component %>
       <div
+        id="cart-banner"
+        data-turbolinks-permanent 
         class="fixed right-0 bottom-0 pb-2 sm:pb-5"
 
         x-data="{ count: <%= cart.count %> }"
@@ -92,7 +112,7 @@
                 <p class="mx-3 font-medium text-white truncate">
                   <span>
                     You have 
-                    <span id="cart-banner-count" data-turbolinks-permanent x-text="count"></span>
+                    <span x-text="count"></span>
                     <span x-text="count > 1 ? ' items ' : ' item '"></span>
                     ready for checkout
                   </span>

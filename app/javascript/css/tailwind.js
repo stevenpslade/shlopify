@@ -10,7 +10,10 @@ module.exports = {
     extend: {
       flex: {
         '4': '4 1 0%'
-      }
+      },
+      colors: {
+        'gray-900-75': 'rgba(22, 30, 46, 0.75)',
+      },
     }
   },
   variants: {
