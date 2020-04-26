@@ -1,3 +1,11 @@
+#cart-count {
+  .count {
+    @apply w-full text-center absolute font-extrabold text-xs;
+    top: 28.9%;
+    left: 0;
+  }
+}
+
 // mobile and higher (sm)
 .product-show-container {
   @apply flex flex-col justify-around h-auto py-10 px-2 text-gray-900 font-normal;

@@ -14,7 +14,8 @@ class CartsController < ApplicationController
         image: url_for(product.images.first),
         price: product.price,
         line_price: product.price * quantity,
-        final_price: cart_subtotal
+        final_price: cart_subtotal,
+        total_cart_count: cart.count,
       },
       status: :ok
     )

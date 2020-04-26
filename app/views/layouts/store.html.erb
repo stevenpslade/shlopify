@@ -24,13 +24,13 @@
       <div
         id="cart"
         data-turbolinks-permanent
-        class="bg-gray-50 fixed inset-y-0 right-0 w-full md:w-2/5 flex flex-col"
+        class="z-10 bg-white fixed inset-y-0 right-0 w-full md:w-1/3 flex flex-col"
         x-data="{
           open: false,
           cart: <%= cart_json %>
         }"
         x-show="open"
-        @open-cart.window="open = $event.detail.open"
+        @open-cart.window="open = true"
         @click.away="open = false"
 
         @add-product.window="
@@ -45,7 +45,7 @@
                 class="inline-flex rounded-md text-gray-900 focus:outline-none transition ease-in-out duration-150"
                 @click="open = false"
               >
-                <svg class="h-full w-8" viewBox="0 0 20 20" fill="currentColor">
+                <svg class="h-full w-6" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
                 </svg>
               </button>
@@ -61,25 +61,50 @@
         <span x-text="cart.final_price"></span>
       </div>
 
-      <div class="fixed bottom-0 left-0 bg-white shadow sm:rounded-lg">
-        <div class="px-4 py-5 sm:p-6">
-          <div class="mt-2 sm:flex sm:items-start sm:justify-between">
-            <div class="max-w-xl text-sm leading-5 text-gray-500">
-              <h3>
-                Added to Cart
-              </h3>
-            </div>
-            <div class="mt-5 sm:mt-0 sm:ml-6 sm:flex-shrink-0 sm:flex sm:items-center">
-              <span class="inline-flex rounded-md shadow-sm">
-                <button
-                  type="button"
-                  class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
-                  x-data="{ open: true }"
-                  @click="$dispatch('open-cart', { open })"
-                >
-                  Open Cart
-                </button>
-              </span>
+      <%# Added to Cart Alert Bar, will eventually be a component %>
+      <div
+        class="fixed right-0 bottom-0 pb-2 sm:pb-5"
+
+        x-data="{ count: <%= cart.count %> }"
+
+        x-show="count > 0"
+        x-transition:enter="transform ease-out duration-300 transition"
+        x-transition:enter-start="translate-y-6 opacity-0" 
+        x-transition:enter-end="translate-y-0 opacity-100" 
+        x-transition:leave="transition ease-in duration-100"
+        x-transition:leave-start="opacity-100" 
+        x-transition:leave-end="opacity-0"
+        
+        @add-product.window="
+          const data = $event.detail;
+          count = data.total_cart_count;
+        "
+      >
+        <div class="max-w-screen-xl mx-auto px-2 sm:px-6 lg:px-8">
+          <div class="p-2 rounded-lg bg-indigo-600 shadow-lg sm:p-3">
+            <div class="flex items-center justify-between flex-wrap">
+              <div class="flex-1 flex items-center">
+                <span class="flex p-2 rounded-lg bg-indigo-800">
+                  <svg class="h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </span>
+                <p class="mx-3 font-medium text-white truncate">
+                  <span>
+                    You have 
+                    <span id="cart-banner-count" data-turbolinks-permanent x-text="count"></span>
+                    <span x-text="count > 1 ? ' items ' : ' item '"></span>
+                    ready for checkout
+                  </span>
+                </p>
+              </div>
+              <div class="order-2 mt-2 flex-shrink-0 w-full sm:mt-0 sm:w-auto">
+                <div class="rounded-md shadow-sm">
+                  <button @click="$dispatch('open-cart')" class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150">
+                    View Cart
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
