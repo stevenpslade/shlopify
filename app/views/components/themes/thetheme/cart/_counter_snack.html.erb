@@ -1,0 +1,49 @@
+<div
+  id="cart-banner"
+  data-turbolinks-permanent 
+  class="fixed right-0 bottom-0 pb-2 sm:pb-5"
+
+  x-data="{ count: <%= cart.count %> }"
+
+  x-show="count > 0"
+  x-transition:enter="transform ease-out duration-300 transition"
+  x-transition:enter-start="translate-y-6 opacity-0" 
+  x-transition:enter-end="translate-y-0 opacity-100" 
+  x-transition:leave="transition ease-in duration-100"
+  x-transition:leave-start="opacity-100" 
+  x-transition:leave-end="opacity-0"
+
+  @update-cart.window="
+    const data = $event.detail;
+    count = data.total_cart_count;
+  "
+>
+  <div class="max-w-screen-xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="p-2 rounded-lg bg-indigo-600 shadow-lg sm:p-3">
+      <div class="flex items-center justify-between flex-wrap">
+        <div class="flex-1 flex items-center">
+          <span class="flex p-2 rounded-lg bg-indigo-800">
+            <svg class="h-6 w-6 text-white" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </span>
+          <p class="mx-3 font-medium text-white truncate">
+            <span>
+              You have 
+              <span x-text="count"></span>
+              <span x-text="count > 1 ? ' items ' : ' item '"></span>
+              ready for checkout
+            </span>
+          </p>
+        </div>
+        <div class="order-2 mt-2 flex-shrink-0 w-full sm:mt-0 sm:w-auto">
+          <div class="rounded-md shadow-sm">
+            <button @click="$dispatch('open-cart')" class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150">
+              View Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
