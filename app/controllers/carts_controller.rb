@@ -3,29 +3,22 @@ class CartsController < ApplicationController
     product_id = params[:product_id].to_s
     modify_delta(product_id, +1)
 
-    product = @current_store.products.find(params[:product_id])
-    quantity = cart[product_id]
-
-    render(
-      json: {
-        product_id: product_id,
-        quantity: quantity,
-        title: product.title,
-        image: url_for(product.images.first),
-        price: product.price,
-        line_price: product.price * quantity,
-        final_price: cart_subtotal,
-        total_cart_count: cart.count,
-      },
-      status: :ok
-    )
+    render json: cart_json, status: :ok
   end
 
   def remove
     product_id = params[:product_id].to_s
     modify_delta(product_id, -1)
 
-    # return json data of product removed?
+    render json: cart_json, status: :ok
+  end
+
+  def remove_product
+    product_id = params[:product_id].to_s
+    cart.delete(product_id)
+    update_cart(cart)
+
+    render json: cart_json, status: :ok
   end
 
   private

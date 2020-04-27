@@ -11,6 +11,7 @@ module CartsHelper
   end
 
   # Array of hashes [{product: Product1, quantity: 1}, {product: Product2, quantity: 1}]
+  # TODO: ensure this only retrieves active, in-stock products
   def cart_data
     @cart_data ||= @current_store.products.where(id: cart.keys).map { |product| { product: product, quantity: cart[product.id.to_s] } }
   end
@@ -35,17 +36,18 @@ module CartsHelper
       quantity = data[:quantity]
 
       products_hash[product.id] = {
-        product_id: product.id,
+        id: product.id,
         quantity: quantity,
         title: product.title,
         image: url_for(product.images.first),
-        price: product.price,
-        line_price: product.price * quantity,
+        price: "$%.2f" % product.price,
+        line_price: "$%.2f" % (product.price * quantity),
       }
     end
 
     cart_hash[:products] = products_hash
-    cart_hash[:final_price] = cart_subtotal
+    cart_hash[:final_price] = "$%.2f" % cart_subtotal
+    cart_hash[:total_cart_count] = cart.count
 
     JSON.generate(cart_hash)
   end

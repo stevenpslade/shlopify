@@ -30,7 +30,7 @@
         class="flex items-center relative cursor-pointer ml-auto"
 
         x-data="{ count: <%= cart.count %> }"
-        @add-product.window="
+        @update-cart.window="
           const data = $event.detail;
           count = data.total_cart_count;
         "
