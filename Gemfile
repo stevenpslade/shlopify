@@ -24,7 +24,7 @@ gem 'bcrypt', '~> 3.1.12'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
-gem 'mini_magick',             '4.7.0'
+gem 'mini_magick',             '4.9.4'
 
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.x'
