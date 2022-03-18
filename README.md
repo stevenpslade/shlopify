@@ -1,3 +1,3 @@
 # Shlopify
 
-A Shopify clone.
+A Shopify clone (created prior to working at Shopify).
